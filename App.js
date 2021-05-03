@@ -1,79 +1,74 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
-import type {Node} from 'react';
+import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
-import {Image, StyleSheet} from 'react-native';
-import LandingScreen from './screens/landing';
-import SearchScreen from './screens/search';
-const App: () => Node = () => {
-  const Tab = createBottomTabNavigator();
+import 'react-native-gesture-handler';
+import LandingScreen from './screens/landingScreen';
+import LoginScreen from './screens/loginScreen';
+import RegisterScreen from './screens/registerScreen';
+import SplashScreen from './screens/splashScreen';
+// import DrawerNavigationRoutes from './Screen/DrawerNavigationRoutes';
 
+const Stack = createStackNavigator();
+
+const Auth = () => {
+  // Stack Navigator for Login and Sign up Screen
   return (
-    <NavigationContainer>
-      <Tab.Navigator
-        initialRouteName="Feed"
-        tabBarOptions={{
-          activeTintColor: '#42f44b',
-        }}>
-        <Tab.Screen
-          name="Home"
-          component={LandingScreen}
-          options={{
-            tabBarLabel: 'Browse',
-            tabBarIcon: ({focused, color, size}) => (
-              <Image
-                source={
-                  focused
-                    ? require('./assets/images/browse.png')
-                    : require('./assets/images/browse.png')
-                }
-                style={{
-                  width: size,
-                  height: size,
-                  borderRadius: size,
-                }}
-              />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Search"
-          component={SearchScreen}
-          options={{
-            tabBarLabel: 'Search',
-            tabBarIcon: ({focused, color, size}) => (
-              <Image
-                source={
-                  focused
-                    ? require('./assets/images/search.png')
-                    : require('./assets/images/search.png')
-                }
-                style={{
-                  width: size,
-                  height: size,
-                  borderRadius: size,
-                }}
-              />
-            ),
-          }}
-        />
-      </Tab.Navigator>
-    </NavigationContainer>
+    <Stack.Navigator initialRouteName="LoginScreen">
+      <Stack.Screen
+        name="LoginScreen"
+        component={LoginScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="RegisterScreen"
+        component={RegisterScreen}
+        options={{
+          title: 'Register', //Set Header Title
+          headerStyle: {
+            backgroundColor: '#0D7538', //Set Header color
+          },
+          headerTintColor: '#fff', //Set Header text color
+          headerTitleStyle: {
+            fontWeight: 'bold', //Set Header text style
+          },
+        }}
+      />
+    </Stack.Navigator>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
+const App = () => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="SplashScreen">
+        {/* SplashScreen which will come once for 5 Seconds */}
+        <Stack.Screen
+          name="SplashScreen"
+          component={SplashScreen}
+          // Hiding header for Splash Screen
+          options={{headerShown: false}}
+        />
+        {/* Auth Navigator: Include Login and Signup */}
+        <Stack.Screen
+          name="Auth"
+          component={Auth}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Landing"
+          component={LandingScreen}
+          options={{headerShown: false}}
+        />
+        {/* Navigation Drawer as a landing page 
+        <Stack.Screen
+          name="DrawerNavigationRoutes"
+          component={DrawerNavigationRoutes}
+          // Hiding header for Navigation Drawer
+          options={{headerShown: false}}
+        />*/}
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
 
 export default App;
