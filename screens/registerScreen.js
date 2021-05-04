@@ -14,7 +14,10 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import Loader from './../shared/Loader';
+import Gateway from '../shared/gateway';
+import Resources from '../shared/resources';
+import {Styles} from '../shared/styles';
+import Loader from './../shared/components/Loader';
 
 const RegisterScreen = props => {
   const [userEmail, setUserEmail] = useState('');
@@ -70,7 +73,7 @@ const RegisterScreen = props => {
     }
     formBody = formBody.join('&');
 
-    fetch('https://ns-recipe-api.herokuapp.com/user', {
+    fetch(Gateway.__REGISTER_USER_URL__, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -102,107 +105,87 @@ const RegisterScreen = props => {
   };
   if (isRegistered) {
     return (
-      <View
-        style={{
-          flex: 1,
-          backgroundColor: '#0D7538',
-          justifyContent: 'center',
-        }}>
-        <Image
-          source={require('./../assets/images/logo.png')}
-          style={{
-            height: 150,
-            resizeMode: 'contain',
-            alignSelf: 'center',
-          }}
-        />
-        <Text style={styles.successTextStyle}>Registration Successful</Text>
+      <View style={Styles.authContainer}>
+        <Image source={Resources.large_logo} style={Styles.authLogo} />
+        <Text style={Styles.brandLogoText}>Registration Successful</Text>
         <TouchableOpacity
-          style={styles.buttonStyle}
+          style={Styles.authButtonContainer}
           activeOpacity={0.5}
-          onPress={() => props.navigation.navigate('LoginScreen')}>
-          <Text style={styles.buttonTextStyle}>Login Now</Text>
+          onPress={() => props.navigation.navigate('Login')}>
+          <Text style={Styles.authButton}>Login</Text>
         </TouchableOpacity>
       </View>
     );
   }
   return (
-    <View style={{flex: 1, backgroundColor: '#0D7538'}}>
+    <View style={Styles.authContainer}>
       <Loader loading={loading} />
       <ScrollView
         keyboardShouldPersistTaps="handled"
-        contentContainerStyle={{
-          justifyContent: 'center',
-          alignContent: 'center',
-        }}>
-        <View style={{alignItems: 'center'}}>
-          <Image
-            source={require('./../assets/images/logo.png')}
-            style={{
-              width: '50%',
-              height: 100,
-              resizeMode: 'contain',
-              margin: 30,
-            }}
-          />
-        </View>
-        <KeyboardAvoidingView enabled>
-          <View style={styles.SectionStyle}>
-            <TextInput
-              style={styles.inputStyle}
-              onChangeText={UserEmail => setUserEmail(UserEmail)}
-              underlineColorAndroid="#f000"
-              placeholder="Enter Email"
-              placeholderTextColor="#f2f2f2"
-              keyboardType="email-address"
-              ref={emailInputRef}
-              returnKeyType="next"
-              onSubmitEditing={() =>
-                confirmInputRef.current && confirmInputRef.current.focus()
-              }
-              blurOnSubmit={false}
-            />
-          </View>
-          <View style={styles.SectionStyle}>
-            <TextInput
-              style={styles.inputStyle}
-              onChangeText={ConfirmEmail => setConfirmEmail(ConfirmEmail)}
-              underlineColorAndroid="#f000"
-              placeholder="Confirm Email"
-              placeholderTextColor="#f2f2f2"
-              keyboardType="email-address"
-              ref={confirmInputRef}
-              returnKeyType="next"
-              onSubmitEditing={() =>
-                passwordInputRef.current && passwordInputRef.current.focus()
-              }
-              blurOnSubmit={false}
-            />
-          </View>
-          <View style={styles.SectionStyle}>
-            <TextInput
-              style={styles.inputStyle}
-              onChangeText={UserPassword => setUserPassword(UserPassword)}
-              underlineColorAndroid="#f000"
-              placeholder="Enter Password"
-              placeholderTextColor="#f2f2f2"
-              ref={passwordInputRef}
-              returnKeyType="next"
-              secureTextEntry={true}
-              blurOnSubmit={false}
-            />
-          </View>
+        contentContainerStyle={Styles.authContainer}>
+        <View>
+          <KeyboardAvoidingView enabled>
+            <View style={Styles.centerAlign}>
+              <Image source={Resources.large_logo} style={Styles.authLogo} />
+              <Text style={Styles.brandLogoText}>Flavour</Text>
+            </View>
+            <View style={Styles.flexRow}>
+              <TextInput
+                style={Styles.authInputText}
+                onChangeText={UserEmail => setUserEmail(UserEmail)}
+                underlineColorAndroid="#f000"
+                placeholderTextColor="#fafafa"
+                placeholder="Enter Email"
+                keyboardType="email-address"
+                returnKeyType="next"
+                ref={emailInputRef}
+                onSubmitEditing={() =>
+                  confirmInputRef.current && confirmInputRef.current.focus()
+                }
+                blurOnSubmit={false}
+              />
+            </View>
+            <View style={Styles.flexRow}>
+              <TextInput
+                style={Styles.authInputText}
+                onChangeText={ConfirmEmail => setConfirmEmail(ConfirmEmail)}
+                underlineColorAndroid="#f000"
+                placeholderTextColor="#f2f2f2"
+                placeholder="Confirm Email"
+                keyboardType="email-address"
+                ref={confirmInputRef}
+                returnKeyType="next"
+                onSubmitEditing={() =>
+                  passwordInputRef.current && passwordInputRef.current.focus()
+                }
+                blurOnSubmit={false}
+              />
+            </View>
+            <View style={Styles.flexRow}>
+              <TextInput
+                style={Styles.authInputText}
+                onChangeText={UserPassword => setUserPassword(UserPassword)}
+                underlineColorAndroid="#f000"
+                placeholderTextColor="#f2f2f2"
+                placeholder="Enter Password"
+                ref={passwordInputRef}
+                returnKeyType="next"
+                secureTextEntry={true}
+                blurOnSubmit={false}
+              />
+            </View>
 
-          {errortext !== '' ? (
-            <Text style={styles.errorTextStyle}>{errortext}</Text>
-          ) : null}
-          <TouchableOpacity
-            style={styles.buttonStyle}
-            activeOpacity={0.5}
-            onPress={handleSubmitButton}>
-            <Text style={styles.buttonTextStyle}>REGISTER</Text>
-          </TouchableOpacity>
-        </KeyboardAvoidingView>
+            {errortext !== '' ? (
+              <Text style={Styles.errorText}>{errortext}</Text>
+            ) : null}
+            <TouchableOpacity
+              style={Styles.authButtonContainer}
+              activeOpacity={0.5}
+              onPress={handleSubmitButton}>
+              <Text style={Styles.authButtonText}>REGISTER</Text>
+            </TouchableOpacity>
+          </KeyboardAvoidingView>
+        </View>
       </ScrollView>
     </View>
   );

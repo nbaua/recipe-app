@@ -6,13 +6,15 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   ScrollView,
-  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
-import Loader from './../shared/Loader';
+import Loader from '../shared/components/Loader';
+import Gateway from '../shared/gateway';
+import Resources from '../shared/resources';
+import {Styles} from '../shared/styles';
 
 const LoginScreen = ({navigation}) => {
   const [userEmail, setUserEmail] = useState('');
@@ -26,20 +28,20 @@ const LoginScreen = ({navigation}) => {
     setErrortext('');
     if (!userEmail) {
       Alert.alert('Flavor', 'Please Enter Email', [
-        {text: 'OK', onPress: () => console.log('OK Pressed')},
+        {text: 'OK', onPress: () => console.log('OK Pressed')}, // to-do validate further
       ]);
 
       return;
     }
     if (!userPassword) {
       Alert.alert('Flavor', 'Please Enter Password', [
-        {text: 'OK', onPress: () => console.log('OK Pressed')},
+        {text: 'OK', onPress: () => console.log('OK Pressed')}, // to-do validate further
       ]);
       return;
     }
     setLoading(true);
 
-    fetch('https://ns-recipe-api.herokuapp.com/auth', {
+    fetch(Gateway.__LOGIN_AUTH_URL__, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -63,45 +65,42 @@ const LoginScreen = ({navigation}) => {
         }
       })
       .catch(error => {
-        //Hide Loader
         setLoading(false);
         console.error(error);
       });
   };
 
   return (
-    <View style={styles.mainBody}>
+    <View style={Styles.authContainer}>
       <Loader loading={loading} />
       <ScrollView
         keyboardShouldPersistTaps="handled"
-        contentContainerStyle={styles.contentContainerStyle}>
+        contentContainerStyle={Styles.authContainer}>
         <View>
           <KeyboardAvoidingView enabled>
-            <View style={styles.centerAlign}>
-              <Image
-                source={require('./../assets/images/logo.png')}
-                style={styles.imageStyle}
-              />
+            <View style={Styles.centerAlign}>
+              <Image source={Resources.large_logo} style={Styles.authLogo} />
+              <Text style={Styles.brandLogoText}>Flavour</Text>
             </View>
-            <View style={styles.SectionStyle}>
+            <View style={Styles.flexRow}>
               <TextInput
-                style={styles.inputStyle}
+                style={Styles.authInputText}
                 onChangeText={UserEmail => setUserEmail(UserEmail)}
-                placeholder="Enter Email" //dummy@abc.com
-                placeholderTextColor="#f2f2f2"
+                underlineColorAndroid="#f000"
+                placeholderTextColor="#fafafa"
                 autoCapitalize="none"
+                placeholder="Enter Email"
                 keyboardType="email-address"
                 returnKeyType="next"
                 onSubmitEditing={() =>
                   passwordInputRef.current && passwordInputRef.current.focus()
                 }
-                underlineColorAndroid="#f000"
                 blurOnSubmit={false}
               />
             </View>
-            <View style={styles.SectionStyle}>
+            <View style={Styles.flexRow}>
               <TextInput
-                style={styles.inputStyle}
+                style={Styles.authInputText}
                 onChangeText={UserPassword => setUserPassword(UserPassword)}
                 placeholder="Enter Password" //12345
                 placeholderTextColor="#f2f2f2"
@@ -115,17 +114,17 @@ const LoginScreen = ({navigation}) => {
               />
             </View>
             {errortext !== '' ? (
-              <Text style={styles.errorTextStyle}>{errortext}</Text>
+              <Text style={Styles.errorText}>{errortext}</Text>
             ) : null}
             <TouchableOpacity
-              style={styles.buttonStyle}
+              style={Styles.authButtonContainer}
               activeOpacity={0.5}
               onPress={handleSubmitPress}>
-              <Text style={styles.buttonTextStyle}>LOGIN</Text>
+              <Text style={Styles.authButtonText}>LOGIN</Text>
             </TouchableOpacity>
             <Text
-              style={styles.registerTextStyle}
-              onPress={() => navigation.navigate('RegisterScreen')}>
+              style={Styles.authSectionText}
+              onPress={() => navigation.navigate('Register')}>
               New Here ? Register
             </Text>
           </KeyboardAvoidingView>
@@ -135,72 +134,3 @@ const LoginScreen = ({navigation}) => {
   );
 };
 export default LoginScreen;
-
-const styles = StyleSheet.create({
-  centerAlign: {alignItems: 'center'},
-  contentContainerStyle: {
-    flex: 1,
-    justifyContent: 'center',
-    alignContent: 'center',
-  },
-  imageStyle: {
-    width: '50%',
-    height: 100,
-    resizeMode: 'contain',
-    margin: 30,
-  },
-  mainBody: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: '#0D7538',
-    alignContent: 'center',
-  },
-  SectionStyle: {
-    flexDirection: 'row',
-    height: 40,
-    marginTop: 20,
-    marginLeft: 35,
-    marginRight: 35,
-    margin: 10,
-  },
-  buttonStyle: {
-    backgroundColor: '#69a14f',
-    borderWidth: 0,
-    color: '#FFFFFF',
-    borderColor: '#69a14f',
-    height: 40,
-    alignItems: 'center',
-    borderRadius: 30,
-    marginLeft: 35,
-    marginRight: 35,
-    marginTop: 20,
-    marginBottom: 25,
-  },
-  buttonTextStyle: {
-    color: '#FFFFFF',
-    paddingVertical: 10,
-    fontSize: 16,
-  },
-  inputStyle: {
-    flex: 1,
-    color: 'white',
-    paddingLeft: 15,
-    paddingRight: 15,
-    borderWidth: 1,
-    borderRadius: 30,
-    borderColor: '#dadae8',
-  },
-  registerTextStyle: {
-    color: '#FFFFFF',
-    textAlign: 'center',
-    fontWeight: 'bold',
-    fontSize: 14,
-    alignSelf: 'center',
-    padding: 10,
-  },
-  errorTextStyle: {
-    color: 'red',
-    textAlign: 'center',
-    fontSize: 14,
-  },
-});
