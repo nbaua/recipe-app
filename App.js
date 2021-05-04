@@ -6,30 +6,30 @@ import LandingScreen from './screens/landingScreen';
 import LoginScreen from './screens/loginScreen';
 import RegisterScreen from './screens/registerScreen';
 import SplashScreen from './screens/splashScreen';
-// import DrawerNavigationRoutes from './Screen/DrawerNavigationRoutes';
+import Constants from './shared/constants';
 
 const Stack = createStackNavigator();
 
 const Auth = () => {
-  // Stack Navigator for Login and Sign up Screen
   return (
-    <Stack.Navigator initialRouteName="LoginScreen">
+    <Stack.Navigator initialRouteName="Login">
       <Stack.Screen
-        name="LoginScreen"
+        name="Login"
         component={LoginScreen}
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="RegisterScreen"
+        name="Register"
         component={RegisterScreen}
         options={{
-          title: 'Register', //Set Header Title
+          title: 'Register',
           headerStyle: {
-            backgroundColor: '#0D7538', //Set Header color
+            backgroundColor: Constants.__ALTERNATE_BACKGROUND_COLOR__,
           },
-          headerTintColor: '#fff', //Set Header text color
+          headerTintColor: Constants.__ALTERNATE_TEXT_COLOR__,
           headerTitleStyle: {
-            fontWeight: 'bold', //Set Header text style
+            fontFamily: Constants.__DEFAULT_HEADING_FONT__,
+            fontWeight: Constants.__FONT_WEIGHT_NORMAL__,
           },
         }}
       />
@@ -40,15 +40,12 @@ const Auth = () => {
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="SplashScreen">
-        {/* SplashScreen which will come once for 5 Seconds */}
+      <Stack.Navigator initialRouteName="Splash">
         <Stack.Screen
-          name="SplashScreen"
+          name="Splash"
           component={SplashScreen}
-          // Hiding header for Splash Screen
           options={{headerShown: false}}
         />
-        {/* Auth Navigator: Include Login and Signup */}
         <Stack.Screen
           name="Auth"
           component={Auth}
