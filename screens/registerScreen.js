@@ -17,7 +17,7 @@ import {
 import Gateway from '../shared/gateway';
 import Resources from '../shared/resources';
 import {Styles} from '../shared/styles';
-import Loader from './../shared/components/Loader';
+import Loader from './../shared/components/loader';
 
 const RegisterScreen = props => {
   const [userEmail, setUserEmail] = useState('');

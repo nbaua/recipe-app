@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import Loader from '../shared/components/Loader';
+import Loader from '../shared/components/loader';
 import Gateway from '../shared/gateway';
 import Resources from '../shared/resources';
 import {Styles} from '../shared/styles';
