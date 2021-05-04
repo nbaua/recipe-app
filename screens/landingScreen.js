@@ -1,11 +1,36 @@
+import AsyncStorage from '@react-native-community/async-storage';
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Alert, Button, StyleSheet, Text, View} from 'react-native';
 
-const LandingScreen = () => {
+const LandingScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.caption}>This is just a dummy text for Landing</Text>
-      <Text style={styles.matter}>This is just a dummy text for Landing</Text>
+      <Button
+        title="Logout"
+        onPress={() => {
+          Alert.alert(
+            'Logout',
+            'Are you sure? You want to logout?',
+            [
+              {
+                text: 'Cancel',
+                onPress: () => {
+                  return null;
+                },
+              },
+              {
+                text: 'Confirm',
+                onPress: () => {
+                  AsyncStorage.clear();
+                  navigation.replace('Auth');
+                },
+              },
+            ],
+            {cancelable: false},
+          );
+        }}
+      />
     </View>
   );
 };
