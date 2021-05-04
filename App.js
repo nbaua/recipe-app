@@ -59,7 +59,7 @@ const App = () => {
           component={LandingScreen}
           options={{headerShown: false}}
         />
-        {/* Navigation Drawer as a landing page 
+        {/* Navigation Drawer as a landing page
         <Stack.Screen
           name="DrawerNavigationRoutes"
           component={DrawerNavigationRoutes}
