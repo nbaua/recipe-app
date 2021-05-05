@@ -9,26 +9,36 @@ import Constants from '../shared/constants';
 import resources from '../shared/resources';
 
 const styles = StyleSheet.create({
-  image: {
-    width: Constants.__SMALL_ELEM_SIZE__,
-    height: Constants.__SMALL_ELEM_SIZE__,
+  imageFocused: {
     padding: Constants.__DEFAULT_PADDING__,
+    tintColor: Constants.__ALTERNATE_TEXT_COLOR__,
+  },
+  image: {
+    padding: Constants.__DEFAULT_PADDING__,
+    tintColor: Constants.__DEFAULT_TEXT_COLOR__,
+  },
+  textLabelFocused: {
+    fontSize: Constants.__EXTRA_SMALL_FONT_SIZE__,
+    color: Constants.__ALTERNATE_TEXT_COLOR__,
+  },
+  textLabel: {
+    fontSize: Constants.__EXTRA_SMALL_FONT_SIZE__,
+    color: Constants.__DEFAULT_TEXT_COLOR__,
   },
 });
 
 const tabBarOptions = {
-  activeTintColor: Constants.__ALTERNATE_BACKGROUND_COLOR__,
-  inactiveTintColor: Constants.__DEFAULT_BACKGROUND_COLOR__,
-  labelStyle: {fontSize: 12},
   style: {
-    backgroundColor: '#fff',
-    borderTopLeftRadius: 15,
-    borderTopRightRadius: 15,
+    backgroundColor: Constants.__ALTERNATE_BACKGROUND_COLOR__,
+    borderTopLeftRadius: Constants.__EXTRA_BORDER_RADIUS__,
+    borderTopRightRadius: Constants.__EXTRA_BORDER_RADIUS__,
     borderTopWidth: 0,
     paddingHorizontal: Constants.__DEFAULT_PADDING__,
+    paddingVertical: Constants.__DEFAULT_PADDING__ * 2,
+    height: Constants.__MEDIUM_ELEM_SIZE__ - Constants.__SMALL_ELEM_SIZE__ / 2,
   },
   tabStyle: {
-    height: Constants.__MEDIUM_ELEM_SIZE__,
+    height: Constants.__MEDIUM_ELEM_SIZE__ / 2,
     paddingHorizontal: Constants.__EXTRA_PADDING__,
   },
   keyboardHidesTabBar: true,
@@ -49,14 +59,15 @@ const AppBottomTab = () => {
             return (
               <Image
                 resizeMode={'contain'}
-                source={focused ? resources.browse : resources.fork_knife}
-                style={styles.icon}
+                source={focused ? resources.browse : resources.browse}
+                style={focused ? styles.imageFocused : styles.image}
               />
             );
           },
-          tabBarLabel: ({color}) => {
+          tabBarLabel: ({focused}) => {
             return (
-              <Text fontSize={12} center color={color}>
+              <Text
+                style={focused ? styles.textLabelFocused : styles.textLabel}>
                 Browse
               </Text>
             );
@@ -73,14 +84,15 @@ const AppBottomTab = () => {
               <Image
                 resizeMode={'contain'}
                 source={focused ? resources.favorite : resources.favorite}
-                style={styles.icon}
+                style={focused ? styles.imageFocused : styles.image}
               />
             );
           },
-          tabBarLabel: ({color}) => {
+          tabBarLabel: ({focused}) => {
             return (
-              <Text fontSize={12} center color={color}>
-                Browse
+              <Text
+                style={focused ? styles.textLabelFocused : styles.textLabel}>
+                Favorite
               </Text>
             );
           },
@@ -96,14 +108,15 @@ const AppBottomTab = () => {
               <Image
                 resizeMode={'contain'}
                 source={focused ? resources.search : resources.search}
-                style={styles.icon}
+                style={focused ? styles.imageFocused : styles.image}
               />
             );
           },
-          tabBarLabel: ({color}) => {
+          tabBarLabel: ({focused}) => {
             return (
-              <Text fontSize={12} center color={color}>
-                Browse
+              <Text
+                style={focused ? styles.textLabelFocused : styles.textLabel}>
+                Search
               </Text>
             );
           },
@@ -119,14 +132,15 @@ const AppBottomTab = () => {
               <Image
                 resizeMode={'contain'}
                 source={focused ? resources.profile : resources.profile}
-                style={styles.icon}
+                style={focused ? styles.imageFocused : styles.image}
               />
             );
           },
-          tabBarLabel: ({color}) => {
+          tabBarLabel: ({focused}) => {
             return (
-              <Text fontSize={12} center color={color}>
-                Browse
+              <Text
+                style={focused ? styles.textLabelFocused : styles.textLabel}>
+                Profile
               </Text>
             );
           },
