@@ -2,7 +2,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import 'react-native-gesture-handler';
-import LandingScreen from './screens/landingScreen';
+import AppBottomTab from './navigation/tabNavigation';
+// import LandingScreen from './screens/landingScreen';
 import LoginScreen from './screens/loginScreen';
 import RegisterScreen from './screens/registerScreen';
 import SplashScreen from './screens/splashScreen';
@@ -53,16 +54,9 @@ const App = () => {
         />
         <Stack.Screen
           name="Landing"
-          component={LandingScreen}
+          component={AppBottomTab}
           options={{headerShown: false}}
         />
-        {/* Navigation Drawer as a landing page
-        <Stack.Screen
-          name="DrawerNavigationRoutes"
-          component={DrawerNavigationRoutes}
-          // Hiding header for Navigation Drawer
-          options={{headerShown: false}}
-        />*/}
       </Stack.Navigator>
     </NavigationContainer>
   );
