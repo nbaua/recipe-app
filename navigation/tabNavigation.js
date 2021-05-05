@@ -49,7 +49,7 @@ const AppBottomTab = () => {
             return (
               <Image
                 resizeMode={'contain'}
-                source={focused ? resources.browse : resources.browse}
+                source={focused ? resources.browse : resources.fork_knife}
                 style={styles.icon}
               />
             );
