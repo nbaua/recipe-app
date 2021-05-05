@@ -2,9 +2,10 @@ import {Platform} from 'react-native';
 
 export default {
   __PRIMARY_BACKGROUND_COLOR__: '#fafafa',
-  __ALTERNATE_BACKGROUND_COLOR__: '#0D7538',
+  __DEFAULT_BACKGROUND_COLOR__: '#e9e9e9',
+  __ALTERNATE_BACKGROUND_COLOR__: '#0d7538',
 
-  __PRIMARY_TEXT_COLOR__: '#0D7538',
+  __PRIMARY_TEXT_COLOR__: '#0d7538',
   __DEFAULT_TEXT_COLOR__: '#333333',
   __ALTERNATE_TEXT_COLOR__: '#fafafa',
 
@@ -12,7 +13,8 @@ export default {
   __ALTERNATE_ERROR_TEXT_COLOR__: '#ffef00',
 
   __HINT_TEXT_COLOR__: '#ffffff',
-  __BORDER_COLOR__: '#dadada',
+  __DEFAULT_BORDER_COLOR__: '#dadada',
+  __DEFAULT_SHADOW_COLOR__: '#c1c1c1',
 
   __DEFAULT_HEADING_FONT__: 'VarelaRound-Regular',
   __DEFAULT_ELEMENTS_FONT__: 'WorkSans-Regular',
@@ -26,7 +28,7 @@ export default {
 
   __DEFAULT_MARGIN__: 6,
   __DEFAULT_PADDING__: 6,
-  __DEFAULT_BORDER_RADIUS__: 6,
+  __DEFAULT_BORDER_RADIUS__: 8,
   __DEFAULT_BORDER_WIDTH__: 1,
 
   __EXTRA_MARGIN__: 18,
