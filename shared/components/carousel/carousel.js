@@ -1,5 +1,13 @@
 import React from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import Constants from './../../constants';
 import {Slide} from './types/slide';
 import {Stat} from './types/stat';
 
@@ -11,22 +19,35 @@ export const Carousel = (props: any) => {
     },
     container: {
       width: '100%',
-      backgroundColor: '#fbfbfb',
-      borderColor: '#ebebeb',
-      borderWidth: 1,
-      borderRadius: 8,
-      shadowColor: '#fcfcfc',
+      backgroundColor: Constants.__DEFAULT_BACKGROUND_COLOR__,
+      borderColor: Constants.__DEFAULT_BORDER_COLOR__,
+      borderWidth: Constants.__DEFAULT_BORDER_WIDTH__,
+      borderRadius: Constants.__DEFAULT_BORDER_RADIUS__,
+      shadowColor: Constants.__DEFAULT_SHADOW_COLOR__,
       shadowOpacity: 1,
-      marginTop: 10,
+      marginVertical: Constants.__DEFAULT_MARGIN__,
       shadowOffset: {
         width: 0,
-        height: 5,
+        height: Constants.__DEFAULT_MARGIN__,
       },
+      elevation:
+        Platform.OS === 'ios' ? null : Constants.__DEFAULT_MARGIN__ / 2,
     },
     scrollView: {
       display: 'flex',
       flexDirection: 'row',
       overflow: 'hidden',
+    },
+    captionText: {
+      textAlignVertical: 'center',
+      fontSize: Constants.__EXTRA_SMALL_FONT_SIZE__,
+      color: Constants.__DEFAULT_TEXT_COLOR__,
+      paddingHorizontal: Constants.__DEFAULT_PADDING__ * 3,
+    },
+    captionWrapper: {
+      flex: 1,
+      justifyContent: 'flex-end',
+      flexDirection: 'row',
     },
     bullets: {
       position: 'absolute',
@@ -34,16 +55,16 @@ export const Carousel = (props: any) => {
       right: 0,
       display: 'flex',
       justifyContent: 'flex-start',
-      flexDirection: 'row',
-      paddingHorizontal: 10,
-      paddingTop: 5,
+      flexDirection: 'row-reverse',
+      paddingHorizontal: Constants.__EXTRA_PADDING__,
+      paddingTop: Constants.__DEFAULT_PADDING__,
     },
     bullet: {
-      paddingHorizontal: 5,
-      fontSize: 20,
+      paddingHorizontal: Constants.__DEFAULT_PADDING__ / 3,
+      fontSize: Constants.__LARGE_FONT_SIZE__,
     },
   });
-  const {items, style} = props;
+  const {caption, items, type, isLarge} = props;
   const itemsPerInterval =
     props.itemsPerInterval === undefined ? 1 : props.itemsPerInterval;
 
@@ -101,15 +122,39 @@ export const Carousel = (props: any) => {
         pagingEnabled
         decelerationRate="fast">
         {items.map((item: any, index: number) => {
-          switch (style) {
+          switch (type) {
             case 'stats':
-              return <Stat key={index} label={item.label} value={item.value} />;
+              return (
+                <Stat
+                  key={index}
+                  title={item.title}
+                  description={item.description}
+                />
+              );
             default:
-              return <Slide key={index} title={item.title} />;
+              return (
+                <Slide
+                  key={index}
+                  autogrow={true}
+                  title={item.title}
+                  description={item.description}
+                  isLarge={isLarge}
+                />
+              );
           }
         })}
       </ScrollView>
-      <View style={styles.bullets}>{bullets}</View>
+      <View style={styles.bullets}>
+        {caption > 0 && (
+          <TouchableOpacity
+            style={styles.captionWrapper}
+            //onPress={() => navigation.navigate({toWhere}, {withParam})}
+          >
+            <Text style={styles.captionText}>{caption}</Text>
+          </TouchableOpacity>
+        )}
+        {bullets}
+      </View>
     </View>
   );
 };

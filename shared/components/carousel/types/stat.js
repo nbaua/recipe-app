@@ -1,45 +1,46 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import Constants from './../../../constants';
 
 export const Stat = (props: any) => {
-  const {label, value} = props;
+  const {description, title} = props;
   const styles = StyleSheet.create({
-    stat: {
-      paddingHorizontal: 20,
-      paddingBottom: 10,
-      paddingTop: 30,
-      flexBasis: '33%',
+    wrapper: {
       flex: 1,
       maxWidth: '33%',
+      flexBasis: '33%',
       display: 'flex',
       flexDirection: 'row',
       flexWrap: 'wrap',
       alignItems: 'center',
       alignContent: 'center',
       justifyContent: 'center',
+      paddingHorizontal: Constants.__EXTRA_PADDING__,
+      paddingVertical: Constants.__EXTRA_PADDING__,
     },
     statText: {
-      width: '100%',
-      textAlign: 'left',
-      fontSize: 20,
+      fontFamily: Constants.__DEFAULT_HEADING_FONT__,
+      fontSize: Constants.__DEFAULT_FONT_SIZE__,
+      fontWeight: Constants.__FONT_WEIGHT_NORMAL__,
+      color: Constants.__DEFAULT_TEXT_COLOR__,
     },
-    statHold: {
-      width: '100%',
-      marginBottom: 8,
-    },
-    statLabel: {
-      width: '100%',
+    statCaptionWrapper: {
       textAlign: 'left',
-      fontSize: 11,
-      fontWeight: '600',
-      paddingTop: 5,
+      marginBottom: Constants.__DEFAULT_MARGIN__,
+    },
+    statCaption: {
+      textAlign: 'left',
+      fontSize: Constants.__EXTRA_SMALL_FONT_SIZE__,
+      color: Constants.__DEFAULT_TEXT_COLOR__,
+      fontWeight: Constants.__FONT_WEIGHT_BOLD__,
+      paddingTop: Constants.__DEFAULT_PADDING__,
     },
   });
   return (
-    <View style={styles.stat}>
-      <Text style={{...styles.statText}}>{value}</Text>
-      <View style={styles.statHold}>
-        <Text style={{...styles.statLabel}}>{label}</Text>
+    <View style={styles.wrapper}>
+      <Text style={{...styles.statText}}>whats that{title}</Text>
+      <View style={styles.statCaptionWrapper}>
+        <Text style={{...styles.statCaption}}>this is it{description}</Text>
       </View>
     </View>
   );
