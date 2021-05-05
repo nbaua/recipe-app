@@ -51,14 +51,14 @@ export const Styles = StyleSheet.create({
     padding: Constants.__DEFAULT_PADDING__ * 2,
     borderWidth: Constants.__DEFAULT_BORDER_WIDTH__,
     borderRadius: Constants.__DEFAULT_BORDER_RADIUS__,
-    borderColor: Constants.__BORDER_COLOR__,
+    borderColor: Constants.__DEFAULT_BORDER_COLOR__,
   },
 
   authButtonContainer: {
     alignItems: 'center',
     borderWidth: 0,
     backgroundColor: Constants.__PRIMARY_BACKGROUND_COLOR__,
-    borderColor: Constants.__BORDER_COLOR__,
+    borderColor: Constants.__DEFAULT_BORDER_COLOR__,
     height: Constants.__SMALL_ELEM_SIZE__,
     borderRadius: Constants.__EXTRA_BORDER_RADIUS__,
     marginHorizontal: Constants.__EXTRA_MARGIN__,
