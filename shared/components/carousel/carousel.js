@@ -14,8 +14,8 @@ import {Stat} from './types/stat';
 export const Carousel = (props: any) => {
   const styles = StyleSheet.create({
     statsHead: {
-      paddingTop: 10,
-      paddingHorizontal: 12,
+      paddingTop: Constants.__DEFAULT_PADDING__,
+      paddingHorizontal: Constants.__DEFAULT_PADDING__ * 2,
     },
     container: {
       width: '100%',
@@ -55,7 +55,7 @@ export const Carousel = (props: any) => {
       right: 0,
       display: 'flex',
       justifyContent: 'flex-start',
-      flexDirection: 'row-reverse',
+      flexDirection: 'row',
       paddingHorizontal: Constants.__EXTRA_PADDING__,
       paddingTop: Constants.__DEFAULT_PADDING__,
     },
@@ -136,8 +136,9 @@ export const Carousel = (props: any) => {
                 <Slide
                   key={index}
                   autogrow={true}
-                  title={item.title}
-                  description={item.description}
+                  pictureUrl={item.pictureUrl}
+                  title={item.name}
+                  description={item.description || item.name}
                   isLarge={isLarge}
                 />
               );

@@ -1,10 +1,9 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import Constants from './../../../constants';
-import Resources from './../../../resources';
 
 export const Slide = (props: any) => {
-  const {title, autogrow, description, isLarge} = props;
+  const {title, pictureUrl, autogrow, description, isLarge} = props;
   const styles = StyleSheet.create({
     slide: {
       flex: 1,
@@ -26,13 +25,11 @@ export const Slide = (props: any) => {
     image: {
       width: Constants.__LARGE_ELEM_SIZE__,
       height: Constants.__LARGE_ELEM_SIZE__,
-      padding: Constants.__EXTRA_PADDING__,
     },
     imageWrapper: {
       borderWidth: Constants.__DEFAULT_BORDER_WIDTH__,
       borderColor: Constants.__DEFAULT_BORDER_COLOR__,
       borderBottomEndRadius: Constants.__EXTRA_BORDER_RADIUS__,
-      padding: Constants.__EXTRA_PADDING__,
       height: Constants.__LARGE_ELEM_SIZE__ + Constants.__EXTRA_PADDING__ * 2,
     },
     imageRow: {
@@ -66,13 +63,14 @@ export const Slide = (props: any) => {
       color: Constants.__DEFAULT_TEXT_COLOR__,
     },
   });
+
   return (
     <View style={styles.slide}>
       <View style={styles.imageRow}>
         <View style={styles.imageWrapper}>
           <Image
-            source={Resources.fork_knife}
-            resizeMode="contain"
+            source={{uri: pictureUrl}}
+            resizeMode="cover"
             style={styles.image}
           />
         </View>
