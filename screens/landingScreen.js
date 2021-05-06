@@ -1,13 +1,14 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import React from 'react';
-import {Alert, Button, StyleSheet, Text, View} from 'react-native';
+import {Alert, Button, SafeAreaView, Text, View} from 'react-native';
 import {Carousel} from '../shared/components/carousel/carousel';
+import {Styles} from './../shared/styles';
 
 const LandingScreen = ({navigation}) => {
   return (
-    <>
-      <View style={styles.container}>
-        <Text style={styles.caption}>
+    <SafeAreaView style={Styles.safeContainer}>
+      <View style={Styles.screenContainer}>
+        <Text style={Styles.caption}>
           This is just a dummy text for Landing
         </Text>
         <Carousel
@@ -31,46 +32,37 @@ const LandingScreen = ({navigation}) => {
             },
           ]}
         />
+
+        <Button
+          // eslint-disable-next-line react-native/no-inline-styles
+          style={{height: 65}}
+          title="Logout ..."
+          onPress={() => {
+            Alert.alert(
+              'Logout',
+              'Are you sure? You want to logout?',
+              [
+                {
+                  text: 'Cancel',
+                  onPress: () => {
+                    return null;
+                  },
+                },
+                {
+                  text: 'Confirm',
+                  onPress: () => {
+                    AsyncStorage.clear();
+                    navigation.replace('Auth');
+                  },
+                },
+              ],
+              {cancelable: false},
+            );
+          }}
+        />
       </View>
-      <Button
-        // eslint-disable-next-line react-native/no-inline-styles
-        style={{height: 65}}
-        title="Logout ..."
-        onPress={() => {
-          Alert.alert(
-            'Logout',
-            'Are you sure? You want to logout?',
-            [
-              {
-                text: 'Cancel',
-                onPress: () => {
-                  return null;
-                },
-              },
-              {
-                text: 'Confirm',
-                onPress: () => {
-                  AsyncStorage.clear();
-                  navigation.replace('Auth');
-                },
-              },
-            ],
-            {cancelable: false},
-          );
-        }}
-      />
-    </>
+    </SafeAreaView>
   );
 };
 
 export default LandingScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginHorizontal: 20,
-    marginVertical: 15,
-  },
-  caption: {fontFamily: 'VarelaRound-Regular', fontSize: 25},
-  matter: {fontFamily: 'WorkSans-Regular', fontSize: 15},
-});

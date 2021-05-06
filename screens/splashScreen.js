@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import React, {useEffect, useState} from 'react';
-import {Image, Text, View} from 'react-native';
+import {Image, SafeAreaView, Text, View} from 'react-native';
 import Resources from '../shared/resources';
 import {Styles} from '../shared/styles';
 
@@ -19,10 +19,12 @@ const SplashScreen = ({navigation}) => {
   }, []);
 
   return (
-    <View style={[Styles.authContainer, Styles.centerAlign]}>
-      <Image source={Resources.large_logo} style={Styles.authLogo} />
-      <Text style={Styles.brandLogoText}>Flavour</Text>
-    </View>
+    <SafeAreaView style={Styles.safeContainer}>
+      <View style={[Styles.authContainer, Styles.centerAlign]}>
+        <Image source={Resources.large_logo} style={Styles.authLogo} />
+        <Text style={Styles.brandLogoText}>Flavour</Text>
+      </View>
+    </SafeAreaView>
   );
 };
 

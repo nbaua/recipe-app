@@ -3,7 +3,12 @@ import Constants from './constants';
 
 export const Styles = StyleSheet.create({
   /**GENERIC STYLES**/
-
+  safeContainer: {
+    flex: 1,
+  },
+  screenContainer: {
+    padding: Constants.__EXTRA_PADDING__,
+  },
   centerAlign: {alignItems: 'center'},
   flexRow: {
     flexDirection: 'row',
