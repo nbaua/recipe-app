@@ -9,8 +9,10 @@ export default {
   __DEFAULT_TEXT_COLOR__: '#333333',
   __ALTERNATE_TEXT_COLOR__: '#fafafa',
 
-  __PRIMARY_ERROR_TEXT_COLOR__: '#ff0000',
+  __PRIMARY_ERROR_TEXT_COLOR__: '#ff6347',
   __ALTERNATE_ERROR_TEXT_COLOR__: '#ffef00',
+  __PRIMARY_SUCCESS_TEXT_COLOR__: '#2a993b',
+  __PRIMARY_INFO_TEXT_COLOR__: '#3b2a99',
 
   __HINT_TEXT_COLOR__: '#ffffff',
   __DEFAULT_BORDER_COLOR__: '#dadada',
