@@ -30,8 +30,6 @@ const styles = StyleSheet.create({
 const tabBarOptions = {
   style: {
     backgroundColor: Constants.__ALTERNATE_BACKGROUND_COLOR__,
-    borderTopLeftRadius: Constants.__EXTRA_BORDER_RADIUS__,
-    borderTopRightRadius: Constants.__EXTRA_BORDER_RADIUS__,
     borderTopWidth: 0,
     paddingHorizontal: Constants.__DEFAULT_PADDING__,
     paddingVertical: Constants.__DEFAULT_PADDING__ * 2,
