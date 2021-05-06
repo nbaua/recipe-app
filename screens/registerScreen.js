@@ -4,7 +4,6 @@
 // Import React and Component
 import React, {createRef, useState} from 'react';
 import {
-  Alert,
   Image,
   KeyboardAvoidingView,
   SafeAreaView,
@@ -15,6 +14,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import Toast from 'react-native-toast-message';
 import Gateway from '../shared/gateway';
 import Resources from '../shared/resources';
 import {Styles} from '../shared/styles';
@@ -36,28 +36,36 @@ const RegisterScreen = props => {
     setErrortext('');
 
     if (!userEmail) {
-      Alert.alert('Flavor', 'Please Enter Email', [
-        {text: 'OK', onPress: () => console.log('OK Pressed')},
-      ]);
+      Toast.show({
+        type: 'error',
+        text1: 'Error Occurred',
+        text2: 'Please enter e-mail.',
+      });
       return;
     }
     if (!confirmEmail) {
-      Alert.alert('Flavor', 'Please Re-Enter Email', [
-        {text: 'OK', onPress: () => console.log('OK Pressed')},
-      ]);
+      Toast.show({
+        type: 'error',
+        text1: 'Error Occurred',
+        text2: 'Please enter confirmation e-mail.',
+      });
       return;
     }
     if (confirmEmail !== userEmail) {
-      Alert.alert('Flavor', 'Both Email Fields Should Match', [
-        {text: 'OK', onPress: () => console.log('OK Pressed')},
-      ]);
+      Toast.show({
+        type: 'error',
+        text1: 'Error Occurred',
+        text2: 'Both Email Fields Should Match.',
+      });
       return;
     }
 
     if (!userPassword) {
-      Alert.alert('Flavor', 'Please Enter Password', [
-        {text: 'OK', onPress: () => console.log('OK Pressed')},
-      ]);
+      Toast.show({
+        type: 'error',
+        text1: 'Error Occurred',
+        text2: 'Please enter password.',
+      });
       return;
     }
     //Show Loader

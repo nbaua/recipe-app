@@ -1,7 +1,6 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import React, {createRef, useState} from 'react';
 import {
-  Alert,
   Image,
   Keyboard,
   KeyboardAvoidingView,
@@ -12,6 +11,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import Toast from 'react-native-toast-message';
 import Loader from '../shared/components/loader';
 import Gateway from '../shared/gateway';
 import Resources from '../shared/resources';
@@ -28,16 +28,19 @@ const LoginScreen = ({navigation}) => {
   const handleSubmitPress = () => {
     setErrortext('');
     if (!userEmail) {
-      Alert.alert('Flavor', 'Please Enter Email', [
-        {text: 'OK', onPress: () => console.log('OK Pressed')}, // to-do validate further
-      ]);
-
+      Toast.show({
+        type: 'error',
+        text1: 'Error Occurred',
+        text2: 'Please enter e-mail.',
+      });
       return;
     }
     if (!userPassword) {
-      Alert.alert('Flavor', 'Please Enter Password', [
-        {text: 'OK', onPress: () => console.log('OK Pressed')}, // to-do validate further
-      ]);
+      Toast.show({
+        type: 'error',
+        text1: 'Error Occurred',
+        text2: 'Please enter password.',
+      });
       return;
     }
     setLoading(true);

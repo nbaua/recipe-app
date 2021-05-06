@@ -2,12 +2,14 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import 'react-native-gesture-handler';
+import Toast from 'react-native-toast-message';
 import AppBottomTab from './navigation/tabNavigation';
 // import LandingScreen from './screens/landingScreen';
 import LoginScreen from './screens/loginScreen';
 import RegisterScreen from './screens/registerScreen';
 import SplashScreen from './screens/splashScreen';
 import Constants from './shared/constants';
+import toastConfig from './shared/toastConfig';
 
 const Stack = createStackNavigator();
 
@@ -40,25 +42,28 @@ const Auth = () => {
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Splash">
-        <Stack.Screen
-          name="Splash"
-          component={SplashScreen}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Auth"
-          component={Auth}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Landing"
-          component={AppBottomTab}
-          options={{headerShown: false}}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Splash">
+          <Stack.Screen
+            name="Splash"
+            component={SplashScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="Auth"
+            component={Auth}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="Landing"
+            component={AppBottomTab}
+            options={{headerShown: false}}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+      <Toast config={toastConfig} ref={ref => Toast.setRef(ref)} />
+    </>
   );
 };
 
