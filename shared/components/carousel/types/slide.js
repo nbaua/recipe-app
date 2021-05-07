@@ -44,6 +44,7 @@ export const Slide = (props: any) => {
       fontSize: Constants.__SMALL_FONT_SIZE__,
       fontWeight: Constants.__FONT_WEIGHT_NORMAL__,
       color: Constants.__DEFAULT_TEXT_COLOR__,
+      minHeight: Constants.__MEDIUM_ELEM_SIZE__ / 1.5,
     },
   });
 
@@ -53,8 +54,12 @@ export const Slide = (props: any) => {
       source={{uri: data.pictureUrl}}
       resizeMode="cover">
       <View style={styles.contentWrapper}>
-        <Text style={styles.itemHeader}>{data.name}</Text>
-        <Text style={styles.itemContent}>{data.description || data.name}</Text>
+        <Text numberOfLines={1} style={styles.itemHeader}>
+          {data.name}
+        </Text>
+        <Text numberOfLines={3} style={styles.itemContent}>
+          {data.description || data.name}
+        </Text>
       </View>
     </ImageBackground>
   );
