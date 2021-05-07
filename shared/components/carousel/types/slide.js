@@ -1,9 +1,9 @@
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {ImageBackground, StyleSheet, Text, View} from 'react-native';
 import Constants from './../../../constants';
 
 export const Slide = (props: any) => {
-  const {title, pictureUrl, autogrow, description, isLarge} = props;
+  const {autogrow, data, isLarge} = props;
   const styles = StyleSheet.create({
     slide: {
       flex: 1,
@@ -13,37 +13,20 @@ export const Slide = (props: any) => {
       display: 'flex',
       flexWrap: 'wrap',
       alignItems: 'center',
-      alignContent: 'center',
-      justifyContent: 'center',
-      paddingHorizontal: Constants.__EXTRA_PADDING__,
-      paddingBottom: Constants.__DEFAULT_PADDING__,
+      alignContent: 'flex-end',
+      justifyContent: 'flex-end',
       paddingTop: Constants.__EXTRA_PADDING__ * 2,
       height: isLarge
         ? Constants.__SUPER_LARGE_ELEM_SIZE__
         : Constants.__EXTRA_LARGE_ELEM_SIZE__,
     },
-    image: {
-      width: Constants.__LARGE_ELEM_SIZE__,
-      height: Constants.__LARGE_ELEM_SIZE__,
-    },
-    imageWrapper: {
-      borderWidth: Constants.__DEFAULT_BORDER_WIDTH__,
-      borderColor: Constants.__DEFAULT_BORDER_COLOR__,
-      borderBottomEndRadius: Constants.__EXTRA_BORDER_RADIUS__,
-      height: Constants.__LARGE_ELEM_SIZE__ + Constants.__EXTRA_PADDING__ * 2,
-    },
-    imageRow: {
-      flexDirection: 'row',
-      flex: 1,
-      height:
-        autogrow === true
-          ? null
-          : Constants.__LARGE_ELEM_SIZE__ + Constants.__EXTRA_PADDING__ * 2,
-    },
     contentWrapper: {
-      // width: '70%',
+      backgroundColor: Constants.__DEFAULT_LIGHT_TRANS_BACKGROUND_COLOR,
       flex: 1,
+      justifyContent: 'flex-end',
+      alignSelf: 'flex-end',
       paddingHorizontal: Constants.__EXTRA_PADDING__,
+      paddingVertical: Constants.__DEFAULT_PADDING__,
       height:
         autogrow === true
           ? null
@@ -65,21 +48,15 @@ export const Slide = (props: any) => {
   });
 
   return (
-    <View style={styles.slide}>
-      <View style={styles.imageRow}>
-        <View style={styles.imageWrapper}>
-          <Image
-            source={{uri: pictureUrl}}
-            resizeMode="cover"
-            style={styles.image}
-          />
-        </View>
-        <View style={styles.contentWrapper}>
-          <Text style={styles.itemHeader}>{title}</Text>
-          <Text style={styles.itemContent}>{description}</Text>
-        </View>
+    <ImageBackground
+      style={styles.slide}
+      source={{uri: data.pictureUrl}}
+      resizeMode="cover">
+      <View style={styles.contentWrapper}>
+        <Text style={styles.itemHeader}>{data.name}</Text>
+        <Text style={styles.itemContent}>{data.description || data.name}</Text>
       </View>
-    </View>
+    </ImageBackground>
   );
 };
 

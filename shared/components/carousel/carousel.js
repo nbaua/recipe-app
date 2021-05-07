@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Platform, ScrollView, StyleSheet, Text, View} from 'react-native';
 import Constants from './../../constants';
 import {Slide} from './types/slide';
 import {Stat} from './types/stat';
@@ -38,17 +31,7 @@ export const Carousel = (props: any) => {
       flexDirection: 'row',
       overflow: 'hidden',
     },
-    captionText: {
-      textAlignVertical: 'center',
-      fontSize: Constants.__EXTRA_SMALL_FONT_SIZE__,
-      color: Constants.__DEFAULT_TEXT_COLOR__,
-      paddingHorizontal: Constants.__DEFAULT_PADDING__ * 3,
-    },
-    captionWrapper: {
-      flex: 1,
-      justifyContent: 'flex-end',
-      flexDirection: 'row',
-    },
+
     bullets: {
       position: 'absolute',
       top: 0,
@@ -57,14 +40,20 @@ export const Carousel = (props: any) => {
       justifyContent: 'flex-start',
       flexDirection: 'row',
       paddingHorizontal: Constants.__EXTRA_PADDING__,
-      paddingTop: Constants.__DEFAULT_PADDING__,
+      backgroundColor: Constants.__ALTERNATE_BACKGROUND_COLOR__,
+      borderBottomLeftRadius: Constants.__EXTRA_BORDER_RADIUS__,
     },
     bullet: {
-      paddingHorizontal: Constants.__DEFAULT_PADDING__ / 3,
       fontSize: Constants.__LARGE_FONT_SIZE__,
+      color: Constants.__ALTERNATE_TEXT_COLOR__,
+    },
+    captionText: {
+      fontSize: Constants.__DEFAULT_FONT_SIZE__,
+      marginVertical: Constants.__DEFAULT_MARGIN__,
+      paddingHorizontal: Constants.__EXTRA_PADDING__,
     },
   });
-  const {caption, items, type, isLarge} = props;
+  const {items, type, isLarge, caption} = props;
   const itemsPerInterval =
     props.itemsPerInterval === undefined ? 1 : props.itemsPerInterval;
 
@@ -97,7 +86,7 @@ export const Carousel = (props: any) => {
         // eslint-disable-next-line react-native/no-inline-styles
         style={{
           ...styles.bullet,
-          opacity: interval === i ? 0.5 : 0.1,
+          opacity: interval === i ? 0.75 : 0.25,
         }}>
         &bull;
       </Text>,
@@ -106,6 +95,7 @@ export const Carousel = (props: any) => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.captionText}>{caption}</Text>
       <ScrollView
         horizontal={true}
         contentContainerStyle={{
@@ -136,26 +126,14 @@ export const Carousel = (props: any) => {
                 <Slide
                   key={index}
                   autogrow={true}
-                  pictureUrl={item.pictureUrl}
-                  title={item.name}
-                  description={item.description || item.name}
+                  data={item}
                   isLarge={isLarge}
                 />
               );
           }
         })}
       </ScrollView>
-      <View style={styles.bullets}>
-        {caption > 0 && (
-          <TouchableOpacity
-            style={styles.captionWrapper}
-            //onPress={() => navigation.navigate({toWhere}, {withParam})}
-          >
-            <Text style={styles.captionText}>{caption}</Text>
-          </TouchableOpacity>
-        )}
-        {bullets}
-      </View>
+      <View style={styles.bullets}>{bullets}</View>
     </View>
   );
 };
