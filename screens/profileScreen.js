@@ -1,11 +1,38 @@
+import AsyncStorage from '@react-native-community/async-storage';
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Alert, Button, StyleSheet, Text, View} from 'react-native';
 
-const ProfileScreen = () => {
+const ProfileScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.caption}>This is just a dummy text for Profile</Text>
-      <Text style={styles.matter}>This is just a dummy text for Profile</Text>
+      <Button
+        // eslint-disable-next-line react-native/no-inline-styles
+        style={{height: 65}}
+        title="Logout ..."
+        onPress={() => {
+          Alert.alert(
+            'Logout',
+            'Are you sure? You want to logout?',
+            [
+              {
+                text: 'Cancel',
+                onPress: () => {
+                  return null;
+                },
+              },
+              {
+                text: 'Confirm',
+                onPress: () => {
+                  AsyncStorage.clear();
+                  navigation.replace('Auth');
+                },
+              },
+            ],
+            {cancelable: false},
+          );
+        }}
+      />
     </View>
   );
 };
