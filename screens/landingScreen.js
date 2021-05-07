@@ -1,10 +1,10 @@
 import AsyncStorage from '@react-native-community/async-storage';
-import React, {useState} from 'react';
-import {SafeAreaView, View} from 'react-native';
-import {Carousel} from '../shared/components/carousel/carousel';
+import React, { useState } from 'react';
+import { SafeAreaView, View } from 'react-native';
+import { Carousel } from '../shared/components/carousel/carousel';
 import Constants from '../shared/constants';
 import Gateway from '../shared/gateway';
-import {Styles} from './../shared/styles';
+import { Styles } from './../shared/styles';
 
 const LandingScreen = ({navigation}) => {
   const [loading, setLoading] = useState(true);
@@ -31,8 +31,7 @@ const LandingScreen = ({navigation}) => {
         )
           .then(response => response.json())
           .then(result => {
-            console.log(result);
-            setLoading(false);
+/            setLoading(false);
             setData(result);
           })
           .catch(e => {

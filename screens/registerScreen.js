@@ -98,11 +98,11 @@ const RegisterScreen = props => {
       .then(responseJson => {
         //Hide Loader
         setLoading(false);
-        console.log(responseJson);
+        // console.log(responseJson);
         // If server response message same as Data Matched
         if (responseJson.status === 'success') {
           setIsisRegistered(true);
-          console.log('Registration Successful. Please Login to proceed');
+          // console.log('Registration Successful. Please Login to proceed'); // -- todo -- improve workflow
         } else {
           setErrortext(responseJson.msg);
         }

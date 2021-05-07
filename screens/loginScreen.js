@@ -62,7 +62,7 @@ const LoginScreen = ({navigation}) => {
         setLoading(false);
         if (res.access_token) {
           AsyncStorage.setItem('access_token', res.access_token);
-          console.log(res.access_token);
+          // console.log(res.access_token);
           navigation.replace('Landing');
         } else {
           setErrortext(res.msg);
