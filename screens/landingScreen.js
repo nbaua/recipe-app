@@ -1,7 +1,6 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import React, {useState} from 'react';
 import {SafeAreaView, View} from 'react-native';
-import Toast from 'react-native-toast-message';
 import {Carousel} from '../shared/components/carousel/carousel';
 import utils from '../shared/components/utils';
 import Constants from '../shared/constants';
@@ -28,11 +27,6 @@ const LandingScreen = ({navigation}) => {
           .then(result => {
             if (result.message === 'Unauthorized') {
               setData(null);
-              Toast.show({
-                type: 'info',
-                text1: 'Session Expired',
-                text2: 'Please login again.',
-              });
               utils.logoutAndClearSession(navigation);
               return;
             } else {
