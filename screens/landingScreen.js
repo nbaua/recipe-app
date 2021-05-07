@@ -1,7 +1,9 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import React, {useState} from 'react';
 import {SafeAreaView, View} from 'react-native';
+import Toast from 'react-native-toast-message';
 import {Carousel} from '../shared/components/carousel/carousel';
+import utils from '../shared/components/utils';
 import Constants from '../shared/constants';
 import Gateway from '../shared/gateway';
 import {Styles} from './../shared/styles';
@@ -20,20 +22,23 @@ const LandingScreen = ({navigation}) => {
             '{LIMIT}',
             Constants.__DEFAULT_RANDOM_ITEMS_LIMIT__,
           ),
-          {
-            method: 'GET',
-            headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json',
-              Authorization: 'bearer ' + token,
-            },
-          },
+          utils.injectGetRequestHeader(token),
         )
           .then(response => response.json())
           .then(result => {
-            // console.log(result);
+            if (result.message === 'Unauthorized') {
+              setData(null);
+              Toast.show({
+                type: 'info',
+                text1: 'Session Expired',
+                text2: 'Please login again.',
+              });
+              utils.logoutAndClearSession(navigation);
+              return;
+            } else {
+              setData(result);
+            }
             setLoading(false);
-            setData(result);
           })
           .catch(e => {
             setLoading(false);
@@ -46,12 +51,14 @@ const LandingScreen = ({navigation}) => {
   return (
     <SafeAreaView style={Styles.safeContainer}>
       <View style={Styles.screenContainer}>
-        <Carousel
-          caption="Recently Viewed By Users"
-          type="slide"
-          isLarge={true}
-          items={data}
-        />
+        {data && (
+          <Carousel
+            caption="Recently Viewed By Users"
+            type="slide"
+            isLarge={true}
+            items={data}
+          />
+        )}
       </View>
     </SafeAreaView>
   );
