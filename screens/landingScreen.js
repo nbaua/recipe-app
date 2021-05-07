@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import React, {useState} from 'react';
-import {Alert, Button, SafeAreaView, View} from 'react-native';
+import {SafeAreaView, View} from 'react-native';
 import {Carousel} from '../shared/components/carousel/carousel';
 import Constants from '../shared/constants';
 import Gateway from '../shared/gateway';
@@ -46,34 +46,11 @@ const LandingScreen = ({navigation}) => {
   return (
     <SafeAreaView style={Styles.safeContainer}>
       <View style={Styles.screenContainer}>
-        <Carousel type="slide" isLarge={true} items={data} />
-
-        <Button
-          // eslint-disable-next-line react-native/no-inline-styles
-          style={{height: 65}}
-          title="Logout ..."
-          onPress={() => {
-            Alert.alert(
-              'Logout',
-              'Are you sure? You want to logout?',
-              [
-                {
-                  text: 'Cancel',
-                  onPress: () => {
-                    return null;
-                  },
-                },
-                {
-                  text: 'Confirm',
-                  onPress: () => {
-                    AsyncStorage.clear();
-                    navigation.replace('Auth');
-                  },
-                },
-              ],
-              {cancelable: false},
-            );
-          }}
+        <Carousel
+          caption="Recently Viewed By Users"
+          type="slide"
+          isLarge={true}
+          items={data}
         />
       </View>
     </SafeAreaView>
