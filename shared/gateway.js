@@ -5,6 +5,6 @@ export default {
   __REGISTER_USER_URL__: __BASE_URL__.concat('user'),
   __RANDOM_ITEMS_URL__: __BASE_URL__.concat('filter/random?limit={LIMIT}'),
   __RANDOM_BY_CATEGORY_URL__: __BASE_URL__.concat(
-    'filter/random?limit={LIMIT}&category={CATEGORY}',
+    'filter/category?limit={LIMIT}&category={CATEGORY}',
   ),
 };
