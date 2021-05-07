@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import React, {useState} from 'react';
-import {SafeAreaView, View} from 'react-native';
+import {SafeAreaView, ScrollView, View} from 'react-native';
 import {Carousel} from '../shared/components/carousel/carousel';
 import utils from '../shared/components/utils';
 import Constants from '../shared/constants';
@@ -10,33 +10,44 @@ import {Styles} from './../shared/styles';
 const LandingScreen = ({navigation}) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = React.useState('');
-  const [data, setData] = React.useState([]);
+  const [randomRecipes, setRandomRecipes] = React.useState([]);
+  const [topRatedRecipes, setTopRatedRecipes] = React.useState([]);
+  const [mostLikedRecipes, setMostLikedRecipes] = React.useState([]);
 
+  const urls = [
+    Gateway.__RANDOM_ITEMS_URL__.replace(
+      '{LIMIT}',
+      Constants.__DEFAULT_RANDOM_ITEMS_LIMIT__,
+    ),
+    Gateway.__RANDOM_BY_CATEGORY_URL__
+      .replace('{LIMIT}', Constants.__DEFAULT_RANDOM_ITEMS_LIMIT__)
+      .replace('{CATEGORY}', 'Recipe'), // to be changed later
+    Gateway.__RANDOM_BY_CATEGORY_URL__
+      .replace('{LIMIT}', Constants.__DEFAULT_RANDOM_ITEMS_LIMIT__)
+      .replace('{CATEGORY}', 'bk-all'), // to be changed later
+  ];
   React.useEffect(() => {
     setLoading(true);
     AsyncStorage.getItem('access_token').then(token => {
       if (token) {
-        fetch(
-          Gateway.__RANDOM_ITEMS_URL__.replace(
-            '{LIMIT}',
-            Constants.__DEFAULT_RANDOM_ITEMS_LIMIT__,
-          ),
-          utils.injectGetRequestHeader(token),
+        Promise.all(
+          urls.map(url => fetch(url, utils.injectGetRequestHeader(token))),
         )
-          .then(response => response.json())
+          .then(resp => Promise.all(resp.map(r => r.json())))
           .then(result => {
+            // console.log(result[0]);
             if (result.message === 'Unauthorized') {
-              setData(null);
+              setRandomRecipes(null);
+              setTopRatedRecipes(null);
+              setMostLikedRecipes(null);
               utils.logoutAndClearSession(navigation);
               return;
             } else {
-              setData(result);
+              setRandomRecipes(result[0]);
+              setTopRatedRecipes(result[1]);
+              setMostLikedRecipes(result[2]);
+              setLoading(false);
             }
-            setLoading(false);
-          })
-          .catch(e => {
-            setLoading(false);
-            setError('fetch failed');
           });
       }
     });
@@ -44,16 +55,32 @@ const LandingScreen = ({navigation}) => {
 
   return (
     <SafeAreaView style={Styles.safeContainer}>
-      <View style={Styles.screenContainer}>
-        {data && (
-          <Carousel
-            caption="Recently Viewed By Users"
-            type="slide"
-            isLarge={true}
-            items={data}
-          />
-        )}
-      </View>
+      <ScrollView>
+        <View style={Styles.screenContainer}>
+          {!error && (
+            <>
+              <Carousel
+                caption="Recently Viewed By Users"
+                type="slide"
+                isLarge={true}
+                items={randomRecipes}
+              />
+              <Carousel
+                caption="Top Rated Breakfast Recipes"
+                type="slide"
+                isLarge={true}
+                items={topRatedRecipes}
+              />
+              <Carousel
+                caption="Most Interesting Recipes"
+                type="slide"
+                isLarge={true}
+                items={mostLikedRecipes}
+              />
+            </>
+          )}
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
