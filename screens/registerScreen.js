@@ -15,6 +15,7 @@ import {
   View,
 } from 'react-native';
 import Toast from 'react-native-toast-message';
+import Constants from '../shared/constants';
 import Gateway from '../shared/gateway';
 import Resources from '../shared/resources';
 import {Styles} from '../shared/styles';
@@ -145,8 +146,7 @@ const RegisterScreen = props => {
                 <TextInput
                   style={Styles.authInputText}
                   onChangeText={UserEmail => setUserEmail(UserEmail)}
-                  underlineColorAndroid="#f000"
-                  placeholderTextColor="#fafafa"
+                  placeholderTextColor={Constants.__ALTERNATE_TEXT_COLOR__}
                   placeholder="Enter Email"
                   keyboardType="email-address"
                   returnKeyType="next"
@@ -161,8 +161,7 @@ const RegisterScreen = props => {
                 <TextInput
                   style={Styles.authInputText}
                   onChangeText={ConfirmEmail => setConfirmEmail(ConfirmEmail)}
-                  underlineColorAndroid="#f000"
-                  placeholderTextColor="#f2f2f2"
+                  placeholderTextColor={Constants.__ALTERNATE_TEXT_COLOR__}
                   placeholder="Confirm Email"
                   keyboardType="email-address"
                   ref={confirmInputRef}
@@ -177,8 +176,7 @@ const RegisterScreen = props => {
                 <TextInput
                   style={Styles.authInputText}
                   onChangeText={UserPassword => setUserPassword(UserPassword)}
-                  underlineColorAndroid="#f000"
-                  placeholderTextColor="#f2f2f2"
+                  placeholderTextColor={Constants.__ALTERNATE_TEXT_COLOR__}
                   placeholder="Enter Password"
                   ref={passwordInputRef}
                   returnKeyType="next"

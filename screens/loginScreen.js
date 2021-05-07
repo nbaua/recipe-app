@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import Toast from 'react-native-toast-message';
 import Loader from '../shared/components/loader';
+import Constants from '../shared/constants';
 import Gateway from '../shared/gateway';
 import Resources from '../shared/resources';
 import {Styles} from '../shared/styles';
@@ -91,8 +92,7 @@ const LoginScreen = ({navigation}) => {
                 <TextInput
                   style={Styles.authInputText}
                   onChangeText={UserEmail => setUserEmail(UserEmail)}
-                  underlineColorAndroid="#f000"
-                  placeholderTextColor="#fafafa"
+                  placeholderTextColor={Constants.__ALTERNATE_TEXT_COLOR__}
                   autoCapitalize="none"
                   placeholder="Enter Email"
                   keyboardType="email-address"
@@ -108,13 +108,12 @@ const LoginScreen = ({navigation}) => {
                   style={Styles.authInputText}
                   onChangeText={UserPassword => setUserPassword(UserPassword)}
                   placeholder="Enter Password" //12345
-                  placeholderTextColor="#f2f2f2"
+                  placeholderTextColor={Constants.__ALTERNATE_TEXT_COLOR__}
                   keyboardType="default"
                   ref={passwordInputRef}
                   onSubmitEditing={Keyboard.dismiss}
                   blurOnSubmit={false}
                   secureTextEntry={true}
-                  underlineColorAndroid="#f000"
                   returnKeyType="next"
                 />
               </View>

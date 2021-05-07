@@ -53,10 +53,11 @@ export const Styles = StyleSheet.create({
     color: Constants.__ALTERNATE_TEXT_COLOR__,
     fontSize: Constants.__DEFAULT_FONT_SIZE__,
     fontWeight: Constants.__FONT_WEIGHT_NORMAL__,
-    padding: Constants.__DEFAULT_PADDING__ * 2,
+    paddingHorizontal: Constants.__DEFAULT_PADDING__ * 2,
     borderWidth: Constants.__DEFAULT_BORDER_WIDTH__,
     borderRadius: Constants.__DEFAULT_BORDER_RADIUS__,
     borderColor: Constants.__DEFAULT_BORDER_COLOR__,
+    height: Constants.__SMALL_ELEM_SIZE__,
   },
 
   authButtonContainer: {
