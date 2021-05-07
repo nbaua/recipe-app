@@ -1,6 +1,6 @@
-import AsyncStorage from '@react-native-community/async-storage';
 import React from 'react';
 import {Alert, Button, StyleSheet, Text, View} from 'react-native';
+import utils from '../shared/components/utils';
 
 const ProfileScreen = ({navigation}) => {
   return (
@@ -24,8 +24,7 @@ const ProfileScreen = ({navigation}) => {
               {
                 text: 'Confirm',
                 onPress: () => {
-                  AsyncStorage.clear();
-                  navigation.replace('Auth');
+                  utils.logoutAndClearSession(navigation);
                 },
               },
             ],
