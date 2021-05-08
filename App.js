@@ -4,6 +4,8 @@ import React from 'react';
 import 'react-native-gesture-handler';
 import Toast from 'react-native-toast-message';
 import AppBottomTab from './navigation/tabNavigation';
+import DetailScreen from './screens/detailScreen';
+import ListingScreen from './screens/listingScreen';
 // import LandingScreen from './screens/landingScreen';
 import LoginScreen from './screens/loginScreen';
 import RegisterScreen from './screens/registerScreen';
@@ -59,6 +61,16 @@ const App = () => {
             name="Landing"
             component={AppBottomTab}
             options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="Listing"
+            component={ListingScreen}
+            options={{headerShown: true}}
+          />
+          <Stack.Screen
+            name="Detail"
+            component={DetailScreen}
+            options={{headerShown: true}}
           />
         </Stack.Navigator>
       </NavigationContainer>
