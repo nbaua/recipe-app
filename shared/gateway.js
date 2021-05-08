@@ -7,4 +7,5 @@ export default {
   __RANDOM_BY_CATEGORY_URL__: __BASE_URL__.concat(
     'filter/category?limit={LIMIT}&category={CATEGORY}',
   ),
+  __GET_DETAILS_BY_ID_URL__: __BASE_URL__.concat('recipe/{ID}'),
 };
