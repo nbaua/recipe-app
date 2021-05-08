@@ -2,6 +2,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import React, {useState} from 'react';
 import {SafeAreaView, ScrollView, View} from 'react-native';
 import {Carousel} from '../shared/components/carousel/carousel';
+import Separator from '../shared/components/separator';
 import utils from '../shared/components/utils';
 import Constants from '../shared/constants';
 import Gateway from '../shared/gateway';
@@ -65,12 +66,14 @@ const LandingScreen = ({navigation}) => {
                 isLarge={true}
                 items={randomRecipes}
               />
+              <Separator />
               <Carousel
                 caption="Top Rated Breakfast Recipes"
                 type="slide"
                 isLarge={true}
                 items={topRatedRecipes}
               />
+              <Separator />
               <Carousel
                 caption="Most Interesting Recipes"
                 type="slide"
