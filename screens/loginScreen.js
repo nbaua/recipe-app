@@ -66,7 +66,11 @@ const LoginScreen = ({navigation}) => {
           navigation.replace('Landing');
         } else {
           setErrortext(res.msg);
-          console.log('Please check your email id or password');
+          Toast.show({
+            type: 'error',
+            text1: 'Error Occurred',
+            text2: 'Please check your email id or password',
+          });
         }
       })
       .catch(error => {
