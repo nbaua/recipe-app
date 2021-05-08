@@ -52,7 +52,7 @@ export const Carousel = (props: any) => {
       paddingHorizontal: Constants.__EXTRA_PADDING__,
     },
   });
-  const {items, type, isLarge, caption} = props;
+  const {items, isLarge, caption} = props;
   const itemsPerInterval =
     props.itemsPerInterval === undefined ? 1 : props.itemsPerInterval;
 
