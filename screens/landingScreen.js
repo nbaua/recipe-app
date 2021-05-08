@@ -42,12 +42,14 @@ const LandingScreen = ({navigation}) => {
               setTopRatedRecipes(null);
               setMostLikedRecipes(null);
               utils.logoutAndClearSession(navigation);
+              setError('Unauthorized');
               return;
             } else {
               setRandomRecipes(result[0]);
               setTopRatedRecipes(result[1]);
               setMostLikedRecipes(result[2]);
               setLoading(false);
+              setError('');
             }
           });
       }
