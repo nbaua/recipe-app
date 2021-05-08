@@ -1,5 +1,13 @@
 import React from 'react';
-import {Platform, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {
+  Alert,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import Constants from './../../constants';
 import {Slide} from './types/slide';
 
@@ -50,6 +58,12 @@ export const Carousel = (props: any) => {
       fontSize: Constants.__DEFAULT_FONT_SIZE__,
       marginVertical: Constants.__DEFAULT_MARGIN__,
       paddingHorizontal: Constants.__EXTRA_PADDING__,
+    },
+    bulletText: {
+      color: Constants.__ALTERNATE_TEXT_COLOR__,
+      fontSize: Constants.__SMALL_FONT_SIZE__,
+      marginVertical: Constants.__DEFAULT_MARGIN__,
+      paddingHorizontal: Constants.__DEFAULT_PADDING__,
     },
   });
   const {items, isLarge, caption} = props;
@@ -116,7 +130,17 @@ export const Carousel = (props: any) => {
           );
         })}
       </ScrollView>
-      <View style={styles.bullets}>{bullets}</View>
+
+      <View style={styles.bullets}>
+        {bullets}
+        <TouchableOpacity
+          // style={styles.container}
+          onPress={p => {
+            Alert.alert(navigator.appCodeName);
+          }}>
+          <Text style={styles.bulletText}>VIEW MORE</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };

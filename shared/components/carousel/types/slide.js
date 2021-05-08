@@ -1,10 +1,18 @@
 import React from 'react';
-import {ImageBackground, StyleSheet, Text, View} from 'react-native';
+import {
+  Alert,
+  ImageBackground,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import Constants from './../../../constants';
 
 export const Slide = (props: any) => {
   const {autogrow, data, isLarge} = props;
   const styles = StyleSheet.create({
+    container: {flex: 1},
     slide: {
       flex: 1,
       flexDirection: 'row',
@@ -49,19 +57,25 @@ export const Slide = (props: any) => {
   });
 
   return (
-    <ImageBackground
-      style={styles.slide}
-      source={{uri: data.pictureUrl}}
-      resizeMode="cover">
-      <View style={styles.contentWrapper}>
-        <Text numberOfLines={1} style={styles.itemHeader}>
-          {data.name}
-        </Text>
-        <Text numberOfLines={3} style={styles.itemContent}>
-          {data.description || data.name}
-        </Text>
-      </View>
-    </ImageBackground>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={p => {
+        Alert.alert(data._id);
+      }}>
+      <ImageBackground
+        style={styles.slide}
+        source={{uri: data.pictureUrl}}
+        resizeMode="cover">
+        <View style={styles.contentWrapper}>
+          <Text numberOfLines={1} style={styles.itemHeader}>
+            {data.name}
+          </Text>
+          <Text numberOfLines={3} style={styles.itemContent}>
+            {data.description || data.name}
+          </Text>
+        </View>
+      </ImageBackground>
+    </TouchableOpacity>
   );
 };
 
