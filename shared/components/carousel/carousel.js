@@ -2,7 +2,6 @@ import React from 'react';
 import {Platform, ScrollView, StyleSheet, Text, View} from 'react-native';
 import Constants from './../../constants';
 import {Slide} from './types/slide';
-import {Stat} from './types/stat';
 
 export const Carousel = (props: any) => {
   const styles = StyleSheet.create({
@@ -112,25 +111,9 @@ export const Carousel = (props: any) => {
         pagingEnabled
         decelerationRate="fast">
         {items.map((item: any, index: number) => {
-          switch (type) {
-            case 'stats':
-              return (
-                <Stat
-                  key={index}
-                  title={item.title}
-                  description={item.description}
-                />
-              );
-            default:
-              return (
-                <Slide
-                  key={index}
-                  autogrow={true}
-                  data={item}
-                  isLarge={isLarge}
-                />
-              );
-          }
+          return (
+            <Slide key={index} autogrow={true} data={item} isLarge={isLarge} />
+          );
         })}
       </ScrollView>
       <View style={styles.bullets}>{bullets}</View>

@@ -62,21 +62,18 @@ const LandingScreen = ({navigation}) => {
             <>
               <Carousel
                 caption="Recently Viewed By Users"
-                type="slide"
                 isLarge={true}
                 items={randomRecipes}
               />
               <Separator />
               <Carousel
                 caption="Top Rated Breakfast Recipes"
-                type="slide"
                 isLarge={true}
                 items={topRatedRecipes}
               />
               <Separator />
               <Carousel
                 caption="Most Interesting Recipes"
-                type="slide"
                 isLarge={true}
                 items={mostLikedRecipes}
               />
