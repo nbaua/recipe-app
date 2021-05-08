@@ -63,18 +63,21 @@ const LandingScreen = ({navigation}) => {
           {!error && (
             <>
               <Carousel
+                nav={navigation}
                 caption="Recently Viewed By Users"
                 isLarge={true}
                 items={randomRecipes}
               />
               <Separator />
               <Carousel
+                nav={navigation}
                 caption="Top Rated Breakfast Recipes"
                 isLarge={true}
                 items={topRatedRecipes}
               />
               <Separator />
               <Carousel
+                nav={navigation}
                 caption="Most Interesting Recipes"
                 isLarge={true}
                 items={mostLikedRecipes}

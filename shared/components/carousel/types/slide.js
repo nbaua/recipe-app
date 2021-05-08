@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Alert,
   ImageBackground,
   StyleSheet,
   Text,
@@ -10,7 +9,7 @@ import {
 import Constants from './../../../constants';
 
 export const Slide = (props: any) => {
-  const {autogrow, data, isLarge} = props;
+  const {autogrow, data, nav, isLarge} = props;
   const styles = StyleSheet.create({
     container: {flex: 1},
     slide: {
@@ -60,7 +59,7 @@ export const Slide = (props: any) => {
     <TouchableOpacity
       style={styles.container}
       onPress={p => {
-        Alert.alert(data._id);
+        nav.navigate('Detail', {id: data._id});
       }}>
       <ImageBackground
         style={styles.slide}

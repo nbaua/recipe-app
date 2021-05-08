@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Alert,
   Platform,
   ScrollView,
   StyleSheet,
@@ -66,7 +65,7 @@ export const Carousel = (props: any) => {
       paddingHorizontal: Constants.__DEFAULT_PADDING__,
     },
   });
-  const {items, isLarge, caption} = props;
+  const {items, isLarge, caption, nav} = props;
   const itemsPerInterval =
     props.itemsPerInterval === undefined ? 1 : props.itemsPerInterval;
 
@@ -115,18 +114,24 @@ export const Carousel = (props: any) => {
           ...styles.scrollView,
           width: `${100 * intervals}%`,
         }}
-        showsHorizontalScrollIndicator={false}
-        onContentSizeChange={(w, h) => init(w)}
         onScroll={data => {
           setWidth(data.nativeEvent.contentSize.width);
           setInterval(getInterval(data.nativeEvent.contentOffset.x));
         }}
+        showsHorizontalScrollIndicator={false}
+        onContentSizeChange={(w, h) => init(w)}
         scrollEventThrottle={200}
         pagingEnabled
         decelerationRate="fast">
         {items.map((item: any, index: number) => {
           return (
-            <Slide key={index} autogrow={true} data={item} isLarge={isLarge} />
+            <Slide
+              key={index}
+              nav={nav}
+              autogrow={true}
+              data={item}
+              isLarge={isLarge}
+            />
           );
         })}
       </ScrollView>
@@ -136,7 +141,7 @@ export const Carousel = (props: any) => {
         <TouchableOpacity
           // style={styles.container}
           onPress={p => {
-            Alert.alert(navigator.appCodeName);
+            nav.navigate('Listing');
           }}>
           <Text style={styles.bulletText}>VIEW MORE</Text>
         </TouchableOpacity>
