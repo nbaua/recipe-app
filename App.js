@@ -70,7 +70,11 @@ const App = () => {
           <Stack.Screen
             name="Detail"
             component={DetailScreen}
-            options={{headerShown: true}}
+            options={{
+              headerShown: true,
+              headerTitle: null,
+              headerTransparent: true,
+            }}
           />
         </Stack.Navigator>
       </NavigationContainer>
