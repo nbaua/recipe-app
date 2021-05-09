@@ -12,4 +12,5 @@ export default {
   search: require('./../assets/images/search.png'),
   //misc
   fork_knife: require('./../assets/images/fork-knife.png'),
+  clock: require('./../assets/images/clock.png'),
 };
