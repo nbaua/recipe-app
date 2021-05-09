@@ -2,10 +2,11 @@ import AsyncStorage from '@react-native-community/async-storage';
 import React, {useState} from 'react';
 import {SafeAreaView, ScrollView, View} from 'react-native';
 import {Carousel} from '../shared/components/carousel/carousel';
+import Loader from '../shared/components/loader';
 import Separator from '../shared/components/separator';
-import utils from '../shared/components/utils';
 import Constants from '../shared/constants';
 import Gateway from '../shared/gateway';
+import utils from '../shared/utils';
 import {Styles} from './../shared/styles';
 
 const LandingScreen = ({navigation}) => {
@@ -60,7 +61,8 @@ const LandingScreen = ({navigation}) => {
     <SafeAreaView style={Styles.safeContainer}>
       <ScrollView>
         <View style={Styles.screenContainer}>
-          {!error && (
+          {loading && <Loader />}
+          {!error && !loading && (
             <>
               <Carousel
                 nav={navigation}
