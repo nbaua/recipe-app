@@ -32,6 +32,7 @@ const Times = props => {
       fontSize: Constants.__LARGE_FONT_SIZE__,
       fontFamily: Constants.__DEFAULT_ELEMENTS_FONT__,
       borderLeftColor: Constants.__DEFAULT_SHADOW_COLOR__,
+      // fontWeight: Constants.__FONT_WEIGHT_BOLD__,
       borderLeftWidth: 1,
     },
     textBlock: {
@@ -39,7 +40,6 @@ const Times = props => {
       color: Constants.__DEFAULT_TEXT_COLOR__,
       fontSize: Constants.__SMALL_FONT_SIZE__,
       fontFamily: Constants.__DEFAULT_ELEMENTS_FONT__,
-      fontWeight: Constants.__FONT_WEIGHT_BOLD__,
       borderLeftColor: Constants.__DEFAULT_SHADOW_COLOR__,
       borderLeftWidth: 1,
     },
@@ -50,9 +50,8 @@ const Times = props => {
       {props.data.map((t, index) => (
         <View key={index} style={styles.timeBlocks}>
           <Text style={styles.headBlock}>{t.type}</Text>
-          <Text style={styles.textBlock}>
-            H {t.hr}:{t.min} M
-          </Text>
+          {t.hr > 0 && <Text style={styles.textBlock}>hrs {t.hr}:</Text>}
+          <Text style={styles.textBlock}>{t.min} min</Text>
         </View>
       ))}
     </View>
