@@ -72,6 +72,14 @@ const App = () => {
             component={DetailScreen}
             options={{
               headerShown: true,
+              headerLeftContainerStyle: {
+                backgroundColor: Constants.__ALTERNATE_BACKGROUND_COLOR__,
+                borderRadius: Constants.__EXTRA_SMALL_ELEM_SIZE__,
+                margin: Constants.__EXTRA_MARGIN__,
+                paddingVertical: Constants.__EXTRA_SMALL_ELEM_SIZE__,
+                opacity: 0.75,
+              },
+              headerTintColor: '#ffffff',
               headerTitle: null,
               headerTransparent: true,
             }}

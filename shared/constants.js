@@ -44,6 +44,7 @@ export default {
   __SMALL_ICON_SIZE__: 24,
   __LARGE_ICON_SIZE__: 48,
 
+  __EXTRA_SMALL_ELEM_SIZE__: 25,
   __SMALL_ELEM_SIZE__: 40,
   __MEDIUM_ELEM_SIZE__: 80,
   __LARGE_ELEM_SIZE__: 120,
