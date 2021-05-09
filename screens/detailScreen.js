@@ -20,7 +20,6 @@ const DetailScreen = ({route, navigation}) => {
   const styles = StyleSheet.create({
     container: {alignContent: 'flex-start', flex: 1},
     backgroundContainer: {
-      flex: 0.33,
       flexDirection: 'row',
       maxWidth: '100%',
       display: 'flex',
@@ -33,26 +32,25 @@ const DetailScreen = ({route, navigation}) => {
       height: Constants.__SUPER_LARGE_ELEM_SIZE__,
     },
     headerContainer: {
-      height: Constants.__EXTRA_LARGE_ELEM_SIZE__,
       flexWrap: 'nowrap',
     },
     title: {
       maxWidth: '100%',
       paddingVertical: Constants.__DEFAULT_PADDING__,
       paddingHorizontal: Constants.__DEFAULT_PADDING__ * 2,
-      height: Constants.__SMALL_ELEM_SIZE__,
-      minHeight: Constants.__MEDIUM_ELEM_SIZE__ / 1.25,
-      maxHeight: Constants.__MEDIUM_ELEM_SIZE__,
       backgroundColor: Constants.__ALTERNATE_BACKGROUND_COLOR__,
       fontFamily: Constants.__DEFAULT_HEADING_FONT__,
       fontSize: Constants.__LARGE_FONT_SIZE__,
       color: Constants.__ALTERNATE_TEXT_COLOR__,
     },
-
     scrollContainer: {
       flex: 1,
       paddingHorizontal: Constants.__EXTRA_PADDING__,
       paddingVertical: Constants.__EXTRA_PADDING__,
+    },
+    descContainer: {
+      fontFamily: Constants.__DEFAULT_ELEMENTS_FONT__,
+      fontSize: Constants.__SMALL_FONT_SIZE__,
     },
   });
 
@@ -91,10 +89,10 @@ const DetailScreen = ({route, navigation}) => {
         <Text numberOfLines={3} style={styles.title}>
           {recipeDetail.name}
         </Text>
-        {recipeDetail.times && <Times data={recipeDetail.times} />}
       </View>
+      {recipeDetail.times && <Times data={recipeDetail.times} />}
       <ScrollView style={styles.scrollContainer}>
-        <Text>{recipeDetail.description}</Text>
+        <Text style={styles.descContainer}>{recipeDetail.description}</Text>
       </ScrollView>
     </View>
   );
