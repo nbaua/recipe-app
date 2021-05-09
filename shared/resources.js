@@ -13,4 +13,8 @@ export default {
   //misc
   fork_knife: require('./../assets/images/fork-knife.png'),
   clock: require('./../assets/images/clock.png'),
+  likes: require('./../assets/images/likes.png'),
+  recipe: require('./../assets/images/recipe.png'),
+  comment: require('./../assets/images/comment.png'),
+  views: require('./../assets/images/views.png'),
 };
