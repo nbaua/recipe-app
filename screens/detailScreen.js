@@ -1,12 +1,7 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import React, {useState} from 'react';
-import {
-  ImageBackground,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {FlatList, ImageBackground, StyleSheet, Text, View} from 'react-native';
+import Ingredient from '../shared/components/ingredient';
 import Times from '../shared/components/times';
 import Constants from '../shared/constants';
 import Gateway from '../shared/gateway';
@@ -49,6 +44,8 @@ const DetailScreen = ({route, navigation}) => {
       paddingVertical: Constants.__EXTRA_PADDING__,
     },
     descContainer: {
+      paddingVertical: Constants.__DEFAULT_PADDING__,
+      paddingHorizontal: Constants.__EXTRA_PADDING__,
       fontFamily: Constants.__DEFAULT_ELEMENTS_FONT__,
       fontSize: Constants.__SMALL_FONT_SIZE__,
     },
@@ -91,11 +88,19 @@ const DetailScreen = ({route, navigation}) => {
         </Text>
       </View>
       {recipeDetail.times && <Times data={recipeDetail.times} />}
-      <ScrollView style={styles.scrollContainer}>
-        <Text style={styles.descContainer}>{recipeDetail.description}</Text>
-      </ScrollView>
+      <Text style={styles.descContainer}>{recipeDetail.description}</Text>
+      <FlatList
+        style={styles.scrollContainer}
+        keyExtractor={item => item._id}
+        renderItem={renderIngredients}
+        data={recipeDetail.ingredients}
+      />
     </View>
   );
 };
+
+const renderIngredients = ({item, index}) => (
+  <Ingredient index={index} item={item} />
+);
 
 export default DetailScreen;
