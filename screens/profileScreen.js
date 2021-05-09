@@ -1,6 +1,6 @@
 import React from 'react';
 import {Alert, Button, StyleSheet, Text, View} from 'react-native';
-import utils from '../shared/components/utils';
+import utils from '../shared/utils';
 
 const ProfileScreen = ({navigation}) => {
   return (
