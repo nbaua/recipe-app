@@ -29,8 +29,8 @@ const Times = props => {
     headBlock: {
       textAlign: 'center',
       color: Constants.__PRIMARY_TEXT_COLOR__,
-      fontSize: Constants.__LARGE_FONT_SIZE__,
-      fontFamily: Constants.__DEFAULT_ELEMENTS_FONT__,
+      fontSize: Constants.__DEFAULT_FONT_SIZE__,
+      fontFamily: Constants.__DEFAULT_HEADING_FONT__,
       borderLeftColor: Constants.__DEFAULT_SHADOW_COLOR__,
       // fontWeight: Constants.__FONT_WEIGHT_BOLD__,
       borderLeftWidth: 1,

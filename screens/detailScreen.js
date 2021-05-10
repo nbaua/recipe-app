@@ -22,7 +22,7 @@ const DetailScreen = ({route, navigation}) => {
   const {id, category} = route.params;
   const [loading, setLoading] = useState(true);
   const [error, setError] = React.useState('');
-  const [viewSteps, setViewSteps] = React.useState(1);
+  const [viewSteps, setViewSteps] = React.useState(0);
   const [recipeDetail, setRecipeDetail] = React.useState([]);
 
   const styles = StyleSheet.create({
@@ -73,13 +73,12 @@ const DetailScreen = ({route, navigation}) => {
       backgroundColor: Constants.__DEFAULT_BACKGROUND_COLOR__,
       paddingVertical: Constants.__DEFAULT_PADDING__,
       paddingHorizontal: Constants.__EXTRA_PADDING__,
-      fontFamily: Constants.__DEFAULT_ELEMENTS_FONT__,
+      fontFamily: Constants.__DEFAULT_HEADING_FONT__,
       fontSize: Constants.__SMALL_FONT_SIZE__,
       marginHorizontal: Constants.__DEFAULT_MARGIN__,
       borderRadius: Constants.__EXTRA_BORDER_RADIUS__,
       borderColor: Constants.__DEFAULT_SHADOW_COLOR__,
       borderWidth: Constants.__DEFAULT_BORDER_WIDTH__,
-      color: Constants.__PRIMARY_TEXT_COLOR__,
     },
   });
 
@@ -132,7 +131,16 @@ const DetailScreen = ({route, navigation}) => {
             <Text
               style={[
                 styles.switch,
-                {fontWeight: viewSteps === 0 ? 'bold' : 'normal'},
+                {
+                  color:
+                    viewSteps === 0
+                      ? Constants.__PRIMARY_TEXT_COLOR__
+                      : Constants.__DEFAULT_TEXT_COLOR__,
+                  backgroundColor:
+                    viewSteps === 0
+                      ? Constants.__PRIMARY_BACKGROUND_COLOR__
+                      : Constants.__DEFAULT_SHADOW_COLOR__,
+                },
               ]}>
               Show Ingredients
             </Text>
@@ -144,7 +152,16 @@ const DetailScreen = ({route, navigation}) => {
             <Text
               style={[
                 styles.switch,
-                {fontWeight: viewSteps === 1 ? 'bold' : 'normal'},
+                {
+                  color:
+                    viewSteps === 1
+                      ? Constants.__PRIMARY_TEXT_COLOR__
+                      : Constants.__DEFAULT_TEXT_COLOR__,
+                  backgroundColor:
+                    viewSteps === 1
+                      ? Constants.__PRIMARY_BACKGROUND_COLOR__
+                      : Constants.__DEFAULT_SHADOW_COLOR__,
+                },
               ]}>
               Show Instructions
             </Text>
