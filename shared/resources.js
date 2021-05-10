@@ -8,10 +8,11 @@ export default {
   //tabs
   browse: require('./../assets/images/browse.png'),
   favorite: require('./../assets/images/favorite.png'),
+  favorite_on: require('./../assets/images/favorite_on.png'),
   profile: require('./../assets/images/profile.png'),
   search: require('./../assets/images/search.png'),
   //misc
-  fork_knife: require('./../assets/images/fork-knife.png'),
+  fork_knife: require('./../assets/images/fork_knife.png'),
   clock: require('./../assets/images/clock.png'),
   likes: require('./../assets/images/likes.png'),
   serve: require('./../assets/images/serve.png'),
