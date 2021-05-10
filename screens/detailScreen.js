@@ -3,6 +3,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import React, {useState} from 'react';
 import {
   FlatList,
+  Image,
   ImageBackground,
   SafeAreaView,
   ScrollView,
@@ -16,11 +17,13 @@ import Instruction from '../shared/components/instruction';
 import Times from '../shared/components/times';
 import Constants from '../shared/constants';
 import Gateway from '../shared/gateway';
+import Resources from '../shared/resources';
 import utils from '../shared/utils';
 
 const DetailScreen = ({route, navigation}) => {
   const {id, category} = route.params;
   const [loading, setLoading] = useState(true);
+  const [isFavorite, setIsFavorite] = useState(true);
   const [error, setError] = React.useState('');
   const [viewSteps, setViewSteps] = React.useState(0);
   const [recipeDetail, setRecipeDetail] = React.useState([]);
@@ -81,9 +84,28 @@ const DetailScreen = ({route, navigation}) => {
       borderColor: Constants.__DEFAULT_SHADOW_COLOR__,
       borderWidth: Constants.__DEFAULT_BORDER_WIDTH__,
     },
+    rightIconContain: {
+      backgroundColor: Constants.__ALTERNATE_BACKGROUND_COLOR__,
+      borderRadius: Constants.__EXTRA_BORDER_RADIUS__,
+      padding: Constants.__DEFAULT_PADDING__,
+      marginVertical: Constants.__EXTRA_MARGIN__ * 2,
+      opacity: 0.8,
+    },
+    rightIcon: {
+      padding: Constants.__DEFAULT_PADDING__,
+      margin: Constants.__DEFAULT_MARGIN__,
+      tintColor: Constants.__PRIMARY_TEXT_COLOR__,
+    },
   });
 
   React.useEffect(() => {
+    // navigation.setOptions({
+    //   headerRight: () => (
+    //     <View style={styles.rightIconContain}>
+    //       <Image style={styles.rightIcon} source={Resources.favorite} />
+    //     </View>
+    //   ),
+    // });
     setLoading(true);
     AsyncStorage.getItem('access_token').then(token => {
       if (token) {
@@ -128,7 +150,6 @@ const DetailScreen = ({route, navigation}) => {
             views={recipeDetail.views}
           />
         )}
-
         {recipeDetail.description !== '' && (
           <Text style={styles.descContainer}>{recipeDetail.description}</Text>
         )}
@@ -153,6 +174,15 @@ const DetailScreen = ({route, navigation}) => {
               ]}>
               Ingredients
             </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              setIsFavorite(!isFavorite);
+            }}>
+            <Image
+              style={styles.rightIcon}
+              source={isFavorite ? Resources.favorite_on : Resources.favorite}
+            />
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
