@@ -1,7 +1,16 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import React, {useState} from 'react';
-import {FlatList, ImageBackground, StyleSheet, Text, View} from 'react-native';
-import Ingredient from '../shared/components/ingredient';
+import {
+  FlatList,
+  ImageBackground,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
+// import Ingredient from '../shared/components/ingredient';
+import Instruction from '../shared/components/instruction';
 import Times from '../shared/components/times';
 import Constants from '../shared/constants';
 import Gateway from '../shared/gateway';
@@ -73,34 +82,39 @@ const DetailScreen = ({route, navigation}) => {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.backgroundContainer}>
-        <ImageBackground
-          style={styles.background}
-          source={{uri: recipeDetail.pictureUrl}}
-          resizeMode="cover">
-          <Text>.</Text>
-        </ImageBackground>
-      </View>
-      <View style={styles.headerContainer}>
-        <Text numberOfLines={3} style={styles.title}>
-          {recipeDetail.name}
-        </Text>
-      </View>
-      {recipeDetail.times && <Times data={recipeDetail.times} />}
-      <Text style={styles.descContainer}>{recipeDetail.description}</Text>
-      <FlatList
-        style={styles.scrollContainer}
-        keyExtractor={item => item._id}
-        renderItem={renderIngredients}
-        data={recipeDetail.ingredients}
-      />
-    </View>
+    <SafeAreaView style={{flex: 1}}>
+      <ScrollView style={styles.container}>
+        <View style={styles.backgroundContainer}>
+          <ImageBackground
+            style={styles.background}
+            source={{uri: recipeDetail.pictureUrl}}
+            resizeMode="cover">
+            <Text>.</Text>
+          </ImageBackground>
+        </View>
+        <View style={styles.headerContainer}>
+          <Text numberOfLines={3} style={styles.title}>
+            {recipeDetail.name}
+          </Text>
+        </View>
+        {recipeDetail.times && <Times data={recipeDetail.times} />}
+        {recipeDetail.description !== '' && (
+          <Text style={styles.descContainer}>{recipeDetail.description}</Text>
+        )}
+        <FlatList
+          horizontal={false}
+          style={styles.scrollContainer}
+          keyExtractor={item => item._id}
+          renderItem={renderIngredients}
+          data={recipeDetail.instructions}
+        />
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const renderIngredients = ({item, index}) => (
-  <Ingredient index={index} item={item} />
+  <Instruction index={index} item={item} />
 );
 
 export default DetailScreen;
