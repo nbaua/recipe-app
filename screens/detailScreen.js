@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import AsyncStorage from '@react-native-community/async-storage';
 import React, {useState} from 'react';
 import {
@@ -7,9 +8,10 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
-// import Ingredient from '../shared/components/ingredient';
+import Ingredient from '../shared/components/ingredient';
 import Instruction from '../shared/components/instruction';
 import Times from '../shared/components/times';
 import Constants from '../shared/constants';
@@ -20,7 +22,9 @@ const DetailScreen = ({route, navigation}) => {
   const {id, category} = route.params;
   const [loading, setLoading] = useState(true);
   const [error, setError] = React.useState('');
+  const [viewSteps, setViewSteps] = React.useState(1);
   const [recipeDetail, setRecipeDetail] = React.useState([]);
+
   const styles = StyleSheet.create({
     container: {alignContent: 'flex-start', flex: 1},
     backgroundContainer: {
@@ -58,6 +62,25 @@ const DetailScreen = ({route, navigation}) => {
       fontFamily: Constants.__DEFAULT_ELEMENTS_FONT__,
       fontSize: Constants.__SMALL_FONT_SIZE__,
     },
+    switchContainer: {
+      flexWrap: 'nowrap',
+      flexDirection: 'row',
+      alignContent: 'center',
+      justifyContent: 'center',
+      marginTop: Constants.__EXTRA_MARGIN__,
+    },
+    switch: {
+      backgroundColor: Constants.__DEFAULT_BACKGROUND_COLOR__,
+      paddingVertical: Constants.__DEFAULT_PADDING__,
+      paddingHorizontal: Constants.__EXTRA_PADDING__,
+      fontFamily: Constants.__DEFAULT_ELEMENTS_FONT__,
+      fontSize: Constants.__SMALL_FONT_SIZE__,
+      marginHorizontal: Constants.__DEFAULT_MARGIN__,
+      borderRadius: Constants.__EXTRA_BORDER_RADIUS__,
+      borderColor: Constants.__DEFAULT_SHADOW_COLOR__,
+      borderWidth: Constants.__DEFAULT_BORDER_WIDTH__,
+      color: Constants.__PRIMARY_TEXT_COLOR__,
+    },
   });
 
   React.useEffect(() => {
@@ -82,7 +105,7 @@ const DetailScreen = ({route, navigation}) => {
   }, []);
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={styles.container}>
       <ScrollView style={styles.container}>
         <View style={styles.backgroundContainer}>
           <ImageBackground
@@ -101,20 +124,51 @@ const DetailScreen = ({route, navigation}) => {
         {recipeDetail.description !== '' && (
           <Text style={styles.descContainer}>{recipeDetail.description}</Text>
         )}
+        <View style={styles.switchContainer}>
+          <TouchableOpacity
+            onPress={() => {
+              setViewSteps(0);
+            }}>
+            <Text
+              style={[
+                styles.switch,
+                {fontWeight: viewSteps === 0 ? 'bold' : 'normal'},
+              ]}>
+              Show Ingredients
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              setViewSteps(1);
+            }}>
+            <Text
+              style={[
+                styles.switch,
+                {fontWeight: viewSteps === 1 ? 'bold' : 'normal'},
+              ]}>
+              Show Instructions
+            </Text>
+          </TouchableOpacity>
+        </View>
         <FlatList
           horizontal={false}
           style={styles.scrollContainer}
           keyExtractor={item => item._id}
-          renderItem={renderIngredients}
-          data={recipeDetail.instructions}
+          renderItem={item => renderIngredients(item, viewSteps)} //{renderIngredients}
+          data={
+            viewSteps > 0 ? recipeDetail.instructions : recipeDetail.ingredients
+          }
         />
       </ScrollView>
     </SafeAreaView>
   );
 };
 
-const renderIngredients = ({item, index}) => (
-  <Instruction index={index} item={item} />
-);
+const renderIngredients = ({item, index}, viewSteps) =>
+  viewSteps > 0 ? (
+    <Instruction index={index} item={item} />
+  ) : (
+    <Ingredient index={index} item={item} />
+  );
 
 export default DetailScreen;
