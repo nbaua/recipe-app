@@ -70,6 +70,7 @@ const DetailScreen = ({route, navigation}) => {
       marginTop: Constants.__EXTRA_MARGIN__,
     },
     switch: {
+      textTransform: 'capitalize',
       backgroundColor: Constants.__DEFAULT_BACKGROUND_COLOR__,
       paddingVertical: Constants.__DEFAULT_PADDING__,
       paddingHorizontal: Constants.__EXTRA_PADDING__,
@@ -119,7 +120,15 @@ const DetailScreen = ({route, navigation}) => {
             {recipeDetail.name}
           </Text>
         </View>
-        {recipeDetail.times && <Times data={recipeDetail.times} />}
+        {recipeDetail.times && (
+          <Times
+            data={recipeDetail.times}
+            serve={recipeDetail.servings}
+            likes={recipeDetail.likes}
+            views={recipeDetail.views}
+          />
+        )}
+
         {recipeDetail.description !== '' && (
           <Text style={styles.descContainer}>{recipeDetail.description}</Text>
         )}
@@ -142,7 +151,7 @@ const DetailScreen = ({route, navigation}) => {
                       : Constants.__DEFAULT_SHADOW_COLOR__,
                 },
               ]}>
-              Show Ingredients
+              Ingredients
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -163,7 +172,7 @@ const DetailScreen = ({route, navigation}) => {
                       : Constants.__DEFAULT_SHADOW_COLOR__,
                 },
               ]}>
-              Show Instructions
+              Instructions
             </Text>
           </TouchableOpacity>
         </View>
