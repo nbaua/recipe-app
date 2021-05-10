@@ -32,7 +32,7 @@ export default Ingredient;
 
 const styles = StyleSheet.create({
   alternateRow: {
-    paddingVertical: Constants.__DEFAULT_PADDING__,
+    paddingVertical: Constants.__DEFAULT_PADDING__ * 2,
     flex: 1,
     flexDirection: 'row',
     borderRadius: Constants.__DEFAULT_BORDER_RADIUS__,
