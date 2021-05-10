@@ -57,7 +57,7 @@ const AppBottomTab = () => {
             return (
               <Image
                 resizeMode={'contain'}
-                source={focused ? resources.browse : resources.browse}
+                source={focused ? resources.recipe : resources.recipe}
                 style={focused ? styles.imageFocused : styles.image}
               />
             );
