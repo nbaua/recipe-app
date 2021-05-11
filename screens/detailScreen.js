@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 import Ingredient from '../shared/components/ingredient';
 import Instruction from '../shared/components/instruction';
+import Tags from '../shared/components/tags';
 import Times from '../shared/components/times';
 import Constants from '../shared/constants';
 import Gateway from '../shared/gateway';
@@ -152,6 +153,9 @@ const DetailScreen = ({route, navigation}) => {
         )}
         {recipeDetail.description !== '' && (
           <Text style={styles.descContainer}>{recipeDetail.description}</Text>
+        )}
+        {recipeDetail.tags !== undefined && recipeDetail.tags.length > 0 && (
+          <Tags data={recipeDetail.tags} />
         )}
         <View style={styles.switchContainer}>
           <TouchableOpacity
