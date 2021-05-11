@@ -9,6 +9,7 @@ import {
   View,
 } from 'react-native';
 import Loader from '../shared/components/loader';
+import RecipeItem from '../shared/components/recipeItem';
 import Constants from '../shared/constants';
 import Gateway from '../shared/gateway';
 import utils from '../shared/utils';
@@ -67,12 +68,7 @@ const ListingScreen = props => {
   };
 
   const ItemView = ({item}) => {
-    return (
-      // Flat List Item
-      <Text style={styles.itemStyle} onPress={() => {}}>
-        {item.name.toUpperCase()}
-      </Text>
-    );
+    return <RecipeItem item={item} />;
   };
 
   return (
@@ -84,6 +80,10 @@ const ListingScreen = props => {
           enableEmptySections={true}
           renderItem={ItemView}
           ListFooterComponent={renderFooter}
+          onEndReachedThreshold={0.5}
+          onEndReached={info => {
+            fetchData();
+          }}
         />
       </View>
     </SafeAreaView>
@@ -91,8 +91,11 @@ const ListingScreen = props => {
 };
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
     flex: 1,
+    justifyContent: 'center',
+    width: '100%',
+    marginVertical: Constants.__DEFAULT_MARGIN__,
+    paddingHorizontal: Constants.__DEFAULT_MARGIN__,
   },
 });
 export default ListingScreen;
