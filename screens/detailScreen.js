@@ -92,21 +92,16 @@ const DetailScreen = ({route, navigation}) => {
       marginVertical: Constants.__EXTRA_MARGIN__ * 2,
       opacity: 0.8,
     },
-    rightIcon: {
+    favIcon: {
       padding: Constants.__DEFAULT_PADDING__,
-      margin: Constants.__DEFAULT_MARGIN__,
+      margin: Constants.__DEFAULT_MARGIN__ / 1.5,
       tintColor: Constants.__PRIMARY_TEXT_COLOR__,
+      width: Constants.__EXTRA_SMALL_ELEM_SIZE__,
+      height: Constants.__EXTRA_SMALL_ELEM_SIZE__,
     },
   });
 
   React.useEffect(() => {
-    // navigation.setOptions({
-    //   headerRight: () => (
-    //     <View style={styles.rightIconContain}>
-    //       <Image style={styles.rightIcon} source={Resources.favorite} />
-    //     </View>
-    //   ),
-    // });
     setLoading(true);
     AsyncStorage.getItem('access_token').then(token => {
       if (token) {
@@ -184,7 +179,7 @@ const DetailScreen = ({route, navigation}) => {
               setIsFavorite(!isFavorite);
             }}>
             <Image
-              style={styles.rightIcon}
+              style={styles.favIcon}
               source={isFavorite ? Resources.favorite_on : Resources.favorite}
             />
           </TouchableOpacity>
