@@ -8,7 +8,7 @@ import {
   View,
 } from 'react-native';
 import Constants from './../../constants';
-import {Slide} from './types/slide';
+import {Slide} from './slide';
 
 export const Carousel = (props: any) => {
   const styles = StyleSheet.create({

@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import Constants from './../../../constants';
+import Constants from './../../constants';
 
 export const Slide = (props: any) => {
   const {autogrow, data, nav, isLarge} = props;
