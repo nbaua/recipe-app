@@ -12,10 +12,12 @@ const styles = StyleSheet.create({
   imageFocused: {
     padding: Constants.__DEFAULT_PADDING__,
     tintColor: Constants.__ALTERNATE_TEXT_COLOR__,
+    width: Constants.__EXTRA_SMALL_ELEM_SIZE__,
   },
   image: {
     padding: Constants.__DEFAULT_PADDING__,
     tintColor: Constants.__DEFAULT_TEXT_COLOR__,
+    width: Constants.__EXTRA_SMALL_ELEM_SIZE__,
   },
   textLabelFocused: {
     fontSize: Constants.__EXTRA_SMALL_FONT_SIZE__,
