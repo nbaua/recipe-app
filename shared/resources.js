@@ -6,7 +6,7 @@ export default {
   toast_success: require('./../assets/images/toast_success.png'),
   toast_info: require('./../assets/images/toast_info.png'),
   //tabs
-  browse: require('./../assets/images/browse.png'),
+  recipe: require('./../assets/images/recipe.png'),
   favorite: require('./../assets/images/favorite.png'),
   favorite_on: require('./../assets/images/favorite_on.png'),
   profile: require('./../assets/images/profile.png'),
@@ -16,7 +16,6 @@ export default {
   clock: require('./../assets/images/clock.png'),
   likes: require('./../assets/images/likes.png'),
   serve: require('./../assets/images/serve.png'),
-  recipe: require('./../assets/images/recipe.png'),
   comment: require('./../assets/images/comment.png'),
   views: require('./../assets/images/views.png'),
 };
