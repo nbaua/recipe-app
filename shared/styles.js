@@ -33,7 +33,13 @@ export const Styles = StyleSheet.create({
     fontSize: Constants.__SUPER_LARGE_FONT_SIZE__,
     color: Constants.__ALTERNATE_TEXT_COLOR__,
   },
-
+  fancyToolbar: {
+    backgroundColor: Constants.__ALTERNATE_BACKGROUND_COLOR__,
+    borderRadius: Constants.__EXTRA_SMALL_ELEM_SIZE__,
+    margin: Constants.__EXTRA_MARGIN__,
+    paddingVertical: Constants.__EXTRA_SMALL_ELEM_SIZE__,
+    opacity: 0.75,
+  },
   /**SPECIFIC STYLES*/
   authContainer: {
     flex: 1,
