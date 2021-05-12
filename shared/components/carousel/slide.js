@@ -30,7 +30,7 @@ export const Slide = (props: any) => {
         : Constants.__EXTRA_LARGE_ELEM_SIZE__,
     },
     contentWrapper: {
-      backgroundColor: Constants.__DEFAULT_LIGHT_TRANS_BACKGROUND_COLOR,
+      backgroundColor: Constants.__DEFAULT_LIGHT_TRANS_BACKGROUND_COLOR__,
       flex: 1,
       justifyContent: 'flex-end',
       alignSelf: 'flex-end',
@@ -63,16 +63,16 @@ export const Slide = (props: any) => {
     socialLeft: {
       flex: 1,
       flexDirection: 'row',
-      backgroundColor: Constants.__ALTERNATE_TRANS_BACKGROUND_COLOR,
+      backgroundColor: Constants.__ALTERNATE_TRANS_BACKGROUND_COLOR__,
     },
     socialCenter: {
       flex: 4,
-      backgroundColor: Constants.__ALTERNATE_TRANS_BACKGROUND_COLOR,
+      backgroundColor: Constants.__ALTERNATE_TRANS_BACKGROUND_COLOR__,
     },
     socialRight: {
       flex: 1,
       flexDirection: 'row-reverse',
-      backgroundColor: Constants.__ALTERNATE_TRANS_BACKGROUND_COLOR,
+      backgroundColor: Constants.__ALTERNATE_TRANS_BACKGROUND_COLOR__,
     },
     social: {
       color: Constants.__ALTERNATE_TEXT_COLOR__,

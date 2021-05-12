@@ -49,21 +49,17 @@ const ListingScreen = props => {
     });
   };
 
-  const renderFooter = () => {
+  const renderStickyPager = () => {
     return (
-      //Footer View with Load More button
       <View style={styles.footer}>
-        <Text style={styles.btnText}>
-          Showing {metaData?.page + 1} of {metaData?.pages}
-        </Text>
-        {/* <TouchableOpacity
-          activeOpacity={0.9}
-          onPress={fetchData}
-          //On Click of button load more data
-          style={styles.loadMoreBtn}>
-          <Text style={styles.btnText}>Load More</Text>
-          {loading ? <Loader /> : null}
-        </TouchableOpacity> */}
+        {loading === true && (
+          <Text style={styles.stickyHeader}>Loading...</Text>
+        )}
+        {loading === false && (
+          <Text style={styles.stickyHeader}>
+            Page {metaData?.page + 1} Loaded ({metaData?.total} total results)
+          </Text>
+        )}
       </View>
     );
   };
@@ -77,7 +73,7 @@ const ListingScreen = props => {
           Alert.alert(id);
         }}>
         <Slide
-          key={index}
+          key={index + id}
           nav={props.navigation} //need navigation
           autogrow={true}
           data={item}
@@ -89,14 +85,19 @@ const ListingScreen = props => {
 
   return (
     <SafeAreaView style={styles.safeContainer}>
-      <View style={styles.container}>
+      {props.mode === 'listing' && (
+        <Text style={styles.bulletText}>VIEW MORE</Text>
+      )}
+      <View style={styles.safeContainer}>
         <FlatList
           data={dataSource}
           keyExtractor={(item, index) => index.toString()}
           enableEmptySections={true}
           renderItem={ItemView}
-          ListFooterComponent={renderFooter}
-          onEndReachedThreshold={0.5}
+          // ListHeaderComponent={renderStickyPager}
+          // stickyHeaderIndices={[0]}
+          ListFooterComponent={renderStickyPager}
+          onEndReachedThreshold={0.1}
           onEndReached={info => {
             fetchData();
           }}
@@ -129,6 +130,21 @@ const styles = StyleSheet.create({
     },
     elevation:
       Platform.OS === 'ios' ? null : Constants.__DEFAULT_SHADOW_ELEVATION__,
+  },
+  stickyHeader: {
+    height: Constants.__SMALL_ELEM_SIZE__,
+    backgroundColor: Constants.__DEFAULT_DARK_TRANS_BACKGROUND_COLOR__,
+    borderWidth: 1,
+    borderColor: Constants.__ALTERNATE_BACKGROUND_COLOR__,
+    borderRadius: Constants.__EXTRA_SMALL_ELEM_SIZE__,
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    color: Constants.__ALTERNATE_TEXT_COLOR__,
+    marginVertical: Constants.__DEFAULT_MARGIN__ * 2,
+    width: '60%',
+    alignSelf: 'center',
+    fontFamily: Constants.__DEFAULT_HEADING_FONT__,
+    fontSize: Constants.__SMALL_FONT_SIZE__,
   },
 });
 export default ListingScreen;
