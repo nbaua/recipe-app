@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import React, {useEffect, useState} from 'react';
 import {
+  Alert,
   FlatList,
   SafeAreaView,
   StyleSheet,
@@ -8,8 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import Loader from '../shared/components/loader';
-import RecipeItem from '../shared/components/recipeItem';
+import {Slide} from '../shared/components/carousel/slide';
 import Constants from '../shared/constants';
 import Gateway from '../shared/gateway';
 import utils from '../shared/utils';
@@ -55,20 +55,34 @@ const ListingScreen = props => {
         <Text style={styles.btnText}>
           Showing {metaData?.page + 1} of {metaData?.pages}
         </Text>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           activeOpacity={0.9}
           onPress={fetchData}
           //On Click of button load more data
           style={styles.loadMoreBtn}>
           <Text style={styles.btnText}>Load More</Text>
           {loading ? <Loader /> : null}
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     );
   };
 
-  const ItemView = ({item}) => {
-    return <RecipeItem item={item} />;
+  const ItemView = ({item, index}) => {
+    const id = item._id;
+    return (
+      <TouchableOpacity
+        onPress={x => {
+          Alert.alert(id);
+        }}>
+        <Slide
+          key={index}
+          nav={props.navigation} //need navigation
+          autogrow={true}
+          data={item}
+          isLarge={true}
+        />
+      </TouchableOpacity>
+    );
   };
 
   return (
