@@ -213,7 +213,9 @@ const DetailScreen = ({route, navigation}) => {
         <FlatList
           horizontal={false}
           style={styles.scrollContainer}
-          keyExtractor={item => item._id}
+          keyExtractor={(item, index) =>
+            viewSteps > 0 ? item._id : index + '-' + item.name
+          }
           renderItem={item => renderIngredients(item, viewSteps)} //{renderIngredients}
           data={
             viewSteps > 0 ? recipeDetail.instructions : recipeDetail.ingredients
