@@ -18,6 +18,7 @@ export const Carousel = (props: any) => {
     },
     container: {
       width: '100%',
+      overflow: 'hidden',
       backgroundColor: Constants.__DEFAULT_BACKGROUND_COLOR__,
       borderColor: Constants.__DEFAULT_BORDER_COLOR__,
       borderWidth: Constants.__DEFAULT_BORDER_WIDTH__,
@@ -30,7 +31,7 @@ export const Carousel = (props: any) => {
         height: Constants.__DEFAULT_MARGIN__,
       },
       elevation:
-        Platform.OS === 'ios' ? null : Constants.__DEFAULT_MARGIN__ / 2,
+        Platform.OS === 'ios' ? null : Constants.__DEFAULT_SHADOW_ELEVATION__,
     },
     scrollView: {
       display: 'flex',

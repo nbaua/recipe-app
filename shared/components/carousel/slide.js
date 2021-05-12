@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Image,
   ImageBackground,
   StyleSheet,
   Text,
@@ -7,6 +8,7 @@ import {
   View,
 } from 'react-native';
 import Constants from './../../constants';
+import Resources from './../../resources';
 
 export const Slide = (props: any) => {
   const {autogrow, data, nav, isLarge} = props;
@@ -34,10 +36,6 @@ export const Slide = (props: any) => {
       alignSelf: 'flex-end',
       paddingHorizontal: Constants.__EXTRA_PADDING__,
       paddingVertical: Constants.__DEFAULT_PADDING__,
-      height:
-        autogrow === true
-          ? null
-          : Constants.__LARGE_ELEM_SIZE__ - Constants.__EXTRA_PADDING__ * 2,
     },
 
     itemHeader: {
@@ -51,7 +49,36 @@ export const Slide = (props: any) => {
       fontSize: Constants.__SMALL_FONT_SIZE__,
       fontWeight: Constants.__FONT_WEIGHT_NORMAL__,
       color: Constants.__DEFAULT_TEXT_COLOR__,
-      minHeight: Constants.__MEDIUM_ELEM_SIZE__ / 1.5,
+    },
+    socialIcon: {
+      width: Constants.__SMALL_ELEM_SIZE__ / 2,
+      height: Constants.__SMALL_ELEM_SIZE__ / 2,
+      tintColor: Constants.__ALTERNATE_TEXT_COLOR__,
+      marginVertical: Constants.__DEFAULT_MARGIN__ * 2,
+      marginHorizontal: Constants.__EXTRA_MARGIN__ / 2,
+    },
+    socialContainer: {
+      flexDirection: 'row',
+    },
+    socialLeft: {
+      flex: 1,
+      flexDirection: 'row',
+      backgroundColor: Constants.__ALTERNATE_TRANS_BACKGROUND_COLOR,
+    },
+    socialCenter: {
+      flex: 4,
+      backgroundColor: Constants.__ALTERNATE_TRANS_BACKGROUND_COLOR,
+    },
+    socialRight: {
+      flex: 1,
+      flexDirection: 'row-reverse',
+      backgroundColor: Constants.__ALTERNATE_TRANS_BACKGROUND_COLOR,
+    },
+    social: {
+      color: Constants.__ALTERNATE_TEXT_COLOR__,
+      fontSize: Constants.__SMALL_FONT_SIZE__,
+      fontFamily: Constants.__DEFAULT_HEADING_FONT__,
+      marginVertical: Constants.__DEFAULT_MARGIN__ * 2,
     },
   });
 
@@ -69,9 +96,25 @@ export const Slide = (props: any) => {
           <Text numberOfLines={1} style={styles.itemHeader}>
             {data.name}
           </Text>
-          <Text numberOfLines={3} style={styles.itemContent}>
-            {data.description || data.name}
-          </Text>
+        </View>
+        <View style={styles.socialContainer}>
+          <View style={styles.socialLeft}>
+            <Image style={styles.socialIcon} source={Resources.views} />
+            <Text numberOfLines={1} style={styles.social}>
+              {data.views}
+            </Text>
+          </View>
+          <View style={styles.socialCenter}>
+            <Text numberOfLines={3} style={styles.social}>
+              {data.description || data.name}
+            </Text>
+          </View>
+          <View style={styles.socialRight}>
+            <Image style={styles.socialIcon} source={Resources.likes} />
+            <Text numberOfLines={1} style={styles.social}>
+              {data.likes}
+            </Text>
+          </View>
         </View>
       </ImageBackground>
     </TouchableOpacity>
