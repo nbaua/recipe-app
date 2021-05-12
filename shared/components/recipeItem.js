@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {Image, ImageBackground, StyleSheet, Text, View} from 'react-native';
 import Constants from './../constants';
@@ -20,6 +21,9 @@ const RecipeItem = ({item}) => {
               {item.views}
             </Text>
           </View>
+          <Text numberOfLines={3} style={styles.title}>
+            {item.name}
+          </Text>
           <View style={styles.socialRight}>
             <Image style={styles.socialIcon} source={Resources.likes} />
             <Text numberOfLines={1} style={styles.social}>
@@ -27,9 +31,11 @@ const RecipeItem = ({item}) => {
             </Text>
           </View>
         </View>
-        <Text numberOfLines={3} style={styles.title}>
-          {item.name}
-        </Text>
+        {item.description !== '' && (
+          <Text numberOfLines={3} style={[styles.desc]}>
+            {item.description}
+          </Text>
+        )}
       </ImageBackground>
     </View>
   );
@@ -59,6 +65,7 @@ const styles = StyleSheet.create({
     borderRadius: Constants.__DEFAULT_BORDER_RADIUS__,
   },
   title: {
+    flex: 4,
     paddingVertical: Constants.__DEFAULT_PADDING__,
     paddingHorizontal: Constants.__DEFAULT_PADDING__ * 2,
     backgroundColor: Constants.__ALTERNATE_BACKGROUND_COLOR__,
@@ -66,12 +73,21 @@ const styles = StyleSheet.create({
     fontSize: Constants.__DEFAULT_FONT_SIZE__,
     color: Constants.__ALTERNATE_TEXT_COLOR__,
   },
+  desc: {
+    justifyContent: 'flex-end',
+    paddingVertical: Constants.__DEFAULT_PADDING__,
+    paddingHorizontal: Constants.__DEFAULT_PADDING__ * 2,
+    backgroundColor: Constants.__ALTERNATE_BACKGROUND_COLOR__,
+    fontFamily: Constants.__DEFAULT_ELEMENTS_FONT__,
+    fontSize: Constants.__EXTRA_SMALL_FONT_SIZE__,
+    color: Constants.__ALTERNATE_TEXT_COLOR__,
+  },
   socialIcon: {
-    width: Constants.__SMALL_ELEM_SIZE__ / 3,
-    height: Constants.__SMALL_ELEM_SIZE__ / 3,
+    width: Constants.__SMALL_ELEM_SIZE__ / 2,
+    height: Constants.__SMALL_ELEM_SIZE__ / 2,
     tintColor: Constants.__ALTERNATE_TEXT_COLOR__,
-    marginVertical: Constants.__DEFAULT_MARGIN__ * 1.25,
-    marginHorizontal: Constants.__EXTRA_MARGIN__,
+    marginVertical: Constants.__DEFAULT_MARGIN__ * 2,
+    marginHorizontal: Constants.__EXTRA_MARGIN__ / 2,
   },
   socialContainer: {
     flexDirection: 'row',
@@ -88,8 +104,8 @@ const styles = StyleSheet.create({
   },
   social: {
     color: Constants.__ALTERNATE_TEXT_COLOR__,
-    fontSize: Constants.__EXTRA_SMALL_FONT_SIZE__,
+    fontSize: Constants.__SMALL_FONT_SIZE__,
     fontFamily: Constants.__DEFAULT_HEADING_FONT__,
-    marginVertical: Constants.__DEFAULT_MARGIN__,
+    marginVertical: Constants.__DEFAULT_MARGIN__ * 2,
   },
 });
