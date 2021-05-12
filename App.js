@@ -11,6 +11,7 @@ import LoginScreen from './screens/loginScreen';
 import RegisterScreen from './screens/registerScreen';
 import SplashScreen from './screens/splashScreen';
 import Constants from './shared/constants';
+import {Styles} from './shared/styles';
 import toastConfig from './shared/toastConfig';
 
 const Stack = createStackNavigator();
@@ -65,20 +66,20 @@ const App = () => {
           <Stack.Screen
             name="Listing"
             component={ListingScreen}
-            options={{headerShown: true}}
+            options={{
+              headerShown: true,
+              headerLeftContainerStyle: Styles.fancyToolbar,
+              headerTintColor: '#ffffff',
+              headerTitle: null,
+              headerTransparent: true,
+            }}
           />
           <Stack.Screen
             name="Detail"
             component={DetailScreen}
             options={{
               headerShown: true,
-              headerLeftContainerStyle: {
-                backgroundColor: Constants.__ALTERNATE_BACKGROUND_COLOR__,
-                borderRadius: Constants.__EXTRA_SMALL_ELEM_SIZE__,
-                margin: Constants.__EXTRA_MARGIN__,
-                paddingVertical: Constants.__EXTRA_SMALL_ELEM_SIZE__,
-                opacity: 0.75,
-              },
+              headerLeftContainerStyle: Styles.fancyToolbar,
               headerTintColor: '#ffffff',
               headerTitle: null,
               headerTransparent: true,
