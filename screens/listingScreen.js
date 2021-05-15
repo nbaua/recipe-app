@@ -11,6 +11,7 @@ import {
   View,
 } from 'react-native';
 import {Slide} from '../shared/components/carousel/slide';
+import ListPager from '../shared/components/listPager';
 import Constants from '../shared/constants';
 import Gateway from '../shared/gateway';
 import utils from '../shared/utils';
@@ -50,18 +51,7 @@ const ListingScreen = props => {
   };
 
   const renderStickyPager = () => {
-    return (
-      <View style={styles.footer}>
-        {loading === true && (
-          <Text style={styles.stickyHeader}>Loading...</Text>
-        )}
-        {loading === false && (
-          <Text style={styles.stickyHeader}>
-            Page {metaData?.page + 1} Loaded ({metaData?.total} total results)
-          </Text>
-        )}
-      </View>
-    );
+    return <ListPager loading={loading} metaData={metaData} />;
   };
 
   const ItemView = ({item, index}) => {
@@ -130,21 +120,6 @@ const styles = StyleSheet.create({
     },
     elevation:
       Platform.OS === 'ios' ? null : Constants.__DEFAULT_SHADOW_ELEVATION__,
-  },
-  stickyHeader: {
-    height: Constants.__SMALL_ELEM_SIZE__,
-    backgroundColor: Constants.__DEFAULT_DARK_TRANS_BACKGROUND_COLOR__,
-    borderWidth: 1,
-    borderColor: Constants.__ALTERNATE_BACKGROUND_COLOR__,
-    borderRadius: Constants.__EXTRA_SMALL_ELEM_SIZE__,
-    textAlign: 'center',
-    textAlignVertical: 'center',
-    color: Constants.__ALTERNATE_TEXT_COLOR__,
-    marginVertical: Constants.__DEFAULT_MARGIN__ * 2,
-    width: '60%',
-    alignSelf: 'center',
-    fontFamily: Constants.__DEFAULT_HEADING_FONT__,
-    fontSize: Constants.__SMALL_FONT_SIZE__,
   },
 });
 export default ListingScreen;
