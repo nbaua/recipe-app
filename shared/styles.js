@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
 import Constants from './constants';
 
 export const Styles = StyleSheet.create({
@@ -89,5 +89,35 @@ export const Styles = StyleSheet.create({
     fontWeight: Constants.__FONT_WEIGHT_BOLD__,
     fontSize: Constants.__DEFAULT_FONT_SIZE__,
     padding: Constants.__DEFAULT_PADDING__,
+  },
+  itemListSafeContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    width: '100%',
+    marginVertical: Constants.__DEFAULT_MARGIN__,
+    paddingHorizontal: Constants.__DEFAULT_MARGIN__,
+  },
+  itemListContainer: {
+    width: '100%',
+    overflow: 'hidden',
+    backgroundColor: Constants.__DEFAULT_BACKGROUND_COLOR__,
+    borderColor: Constants.__DEFAULT_BORDER_COLOR__,
+    borderWidth: Constants.__DEFAULT_BORDER_WIDTH__,
+    borderRadius: Constants.__DEFAULT_BORDER_RADIUS__,
+    shadowColor: Constants.__DEFAULT_SHADOW_COLOR__,
+    shadowOpacity: 1,
+    marginVertical: Constants.__DEFAULT_MARGIN__,
+    shadowOffset: {
+      width: 0,
+      height: Constants.__DEFAULT_MARGIN__,
+    },
+    elevation:
+      Platform.OS === 'ios' ? null : Constants.__DEFAULT_SHADOW_ELEVATION__,
+  },
+  bulletText: {
+    color: Constants.__ALTERNATE_TEXT_COLOR__,
+    fontSize: Constants.__SMALL_FONT_SIZE__,
+    marginVertical: Constants.__DEFAULT_MARGIN__,
+    paddingHorizontal: Constants.__DEFAULT_PADDING__,
   },
 });

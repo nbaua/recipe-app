@@ -3,10 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {
   Alert,
   FlatList,
-  Platform,
   SafeAreaView,
-  StyleSheet,
-  Text,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -14,6 +11,7 @@ import {Slide} from '../shared/components/carousel/slide';
 import ListPager from '../shared/components/listPager';
 import Constants from '../shared/constants';
 import Gateway from '../shared/gateway';
+import {Styles} from '../shared/styles';
 import utils from '../shared/utils';
 
 const ListingScreen = props => {
@@ -58,7 +56,7 @@ const ListingScreen = props => {
     const id = item._id;
     return (
       <TouchableOpacity
-        style={styles.container}
+        style={Styles.itemListContainer}
         onPress={x => {
           Alert.alert(id);
         }}>
@@ -74,11 +72,8 @@ const ListingScreen = props => {
   };
 
   return (
-    <SafeAreaView style={styles.safeContainer}>
-      {props.mode === 'listing' && (
-        <Text style={styles.bulletText}>VIEW MORE</Text>
-      )}
-      <View style={styles.safeContainer}>
+    <SafeAreaView style={Styles.itemListSafeContainer}>
+      <View style={Styles.itemListSafeContainer}>
         <FlatList
           data={dataSource}
           keyExtractor={(item, index) => index.toString()}
@@ -96,30 +91,4 @@ const ListingScreen = props => {
     </SafeAreaView>
   );
 };
-const styles = StyleSheet.create({
-  safeContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    width: '100%',
-    marginVertical: Constants.__DEFAULT_MARGIN__,
-    paddingHorizontal: Constants.__DEFAULT_MARGIN__,
-  },
-  container: {
-    width: '100%',
-    overflow: 'hidden',
-    backgroundColor: Constants.__DEFAULT_BACKGROUND_COLOR__,
-    borderColor: Constants.__DEFAULT_BORDER_COLOR__,
-    borderWidth: Constants.__DEFAULT_BORDER_WIDTH__,
-    borderRadius: Constants.__DEFAULT_BORDER_RADIUS__,
-    shadowColor: Constants.__DEFAULT_SHADOW_COLOR__,
-    shadowOpacity: 1,
-    marginVertical: Constants.__DEFAULT_MARGIN__,
-    shadowOffset: {
-      width: 0,
-      height: Constants.__DEFAULT_MARGIN__,
-    },
-    elevation:
-      Platform.OS === 'ios' ? null : Constants.__DEFAULT_SHADOW_ELEVATION__,
-  },
-});
 export default ListingScreen;
