@@ -142,7 +142,7 @@ export const Carousel = (props: any) => {
         <TouchableOpacity
           // style={styles.container}
           onPress={p => {
-            nav.navigate('Listing', {mode: 'listing'});
+            nav.navigate('Listing');
           }}>
           <Text style={styles.bulletText}>VIEW MORE</Text>
         </TouchableOpacity>
