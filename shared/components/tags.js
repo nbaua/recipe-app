@@ -10,7 +10,7 @@ const Tags = props => {
       <View style={styles.container}>
         {data.map((t, index) => (
           <TouchableOpacity>
-            <Text key={styles.tag} style={styles.tag}>
+            <Text key={t + '-' + index} style={styles.tag}>
               {t}
             </Text>
           </TouchableOpacity>
