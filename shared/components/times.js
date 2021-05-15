@@ -15,7 +15,7 @@ const Times = props => {
       borderBottomWidth: 1,
     },
     timeBlocks: {
-      flex: 0.8,
+      flex: 1,
       justifyContent: 'center',
       flexDirection: 'column',
     },
@@ -25,7 +25,7 @@ const Times = props => {
       alignItems: 'center',
       textAlign: 'center',
       paddingHorizontal: Constants.__DEFAULT_PADDING__,
-      flex: 0.3,
+      flex: 1,
     },
     imageBlock: {
       width: Constants.__EXTRA_SMALL_ELEM_SIZE__,

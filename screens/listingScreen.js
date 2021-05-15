@@ -97,7 +97,7 @@ const ListingScreen = props => {
           // ListHeaderComponent={renderStickyPager}
           // stickyHeaderIndices={[0]}
           ListFooterComponent={renderStickyPager}
-          onEndReachedThreshold={0.1}
+          onEndReachedThreshold={0.6}
           onEndReached={info => {
             fetchData();
           }}
