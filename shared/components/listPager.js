@@ -8,7 +8,7 @@ const ListPager = ({loading, metaData}) => {
       {loading === true && <Text style={styles.stickyControl}>Loading...</Text>}
       {loading === false && (
         <Text style={styles.stickyControl}>
-          Page {metaData?.page + 1} Loaded ({metaData?.total} total results)
+          Page {metaData?.pages} Loaded ({metaData?.total} total results)
         </Text>
       )}
     </View>
