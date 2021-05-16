@@ -223,9 +223,9 @@ const DetailScreen = ({route, navigation}) => {
 
 const renderIngredients = ({item, index}, viewSteps) =>
   viewSteps > 0 ? (
-    <Instruction index={index} item={item} />
+    <Instruction key={item._id + '-' + index} index={index} item={item} />
   ) : (
-    <Ingredient index={index} item={item} />
+    <Ingredient key={item.name + '-' + index} index={index} item={item} />
   );
 
 export default DetailScreen;

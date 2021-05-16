@@ -7,9 +7,10 @@ const Tags = props => {
 
   return (
     <>
+      <Text style={styles.container}>Related search tags</Text>
       <View style={styles.container}>
         {data.map((t, index) => (
-          <TouchableOpacity>
+          <TouchableOpacity key={t + '-' + index}>
             <Text key={t + '-' + index} style={styles.tag}>
               {t}
             </Text>
@@ -30,6 +31,12 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     justifyContent: 'center',
     marginTop: Constants.__DEFAULT_MARGIN__,
+    textAlign: 'center',
+    textTransform: 'uppercase',
+    color: Constants.__DEFAULT_SHADOW_COLOR__,
+    fontSize: Constants.__EXTRA_SMALL_FONT_SIZE__,
+    fontWeight: Constants.__FONT_WEIGHT_BOLD__,
+    fontFamily: Constants.__DEFAULT_ELEMENTS_FONT__,
   },
   tag: {
     textTransform: 'capitalize',
