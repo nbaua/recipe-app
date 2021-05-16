@@ -10,7 +10,13 @@ const Tags = props => {
       <Text style={styles.container}>Related search tags</Text>
       <View style={styles.container}>
         {data.map((t, index) => (
-          <TouchableOpacity key={t + '-' + index}>
+          <TouchableOpacity
+            key={t + '-' + index}
+            onPress={() => {
+              // props.nav.replace('Search', {
+              //   tag: t,
+              // }); to-do -fix navigation stack issues
+            }}>
             <Text key={t + '-' + index} style={styles.tag}>
               {t}
             </Text>

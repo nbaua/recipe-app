@@ -150,7 +150,7 @@ const DetailScreen = ({route, navigation}) => {
           <Text style={styles.descContainer}>{recipeDetail.description}</Text>
         )}
         {recipeDetail.tags !== undefined && recipeDetail.tags.length > 0 && (
-          <Tags data={recipeDetail.tags} />
+          <Tags nav={navigation} data={recipeDetail.tags} />
         )}
         <View style={styles.switchContainer}>
           <TouchableOpacity
