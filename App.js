@@ -1,6 +1,7 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
+import {LogBox} from 'react-native';
 import 'react-native-gesture-handler';
 import Toast from 'react-native-toast-message';
 import AppBottomTab from './navigation/tabNavigation';
@@ -13,6 +14,8 @@ import SplashScreen from './screens/splashScreen';
 import Constants from './shared/constants';
 import {Styles} from './shared/styles';
 import toastConfig from './shared/toastConfig';
+
+LogBox.ignoreLogs(['VirtualizedLists', 'Warning: Each']);
 
 const Stack = createStackNavigator();
 
