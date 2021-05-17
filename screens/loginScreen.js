@@ -61,6 +61,7 @@ const LoginScreen = ({navigation}) => {
       .then(res => {
         setLoading(false);
         if (res.access_token) {
+          AsyncStorage.setItem('email', userEmail);
           AsyncStorage.setItem('access_token', res.access_token);
           // console.log(res.access_token);
           navigation.replace('Landing');
