@@ -14,6 +14,14 @@ export const Styles = StyleSheet.create({
     textAlign: 'center',
     textAlignVertical: 'center',
   },
+
+  flexColumn: {
+    flex: 1,
+    flexDirection: 'column',
+    height: Constants.__SMALL_ELEM_SIZE__,
+    marginVertical: Constants.__EXTRA_MARGIN__,
+    marginHorizontal: Constants.__EXTRA_MARGIN__,
+  },
   flexRow: {
     flexDirection: 'row',
     height: Constants.__SMALL_ELEM_SIZE__,
