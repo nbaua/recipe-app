@@ -5,6 +5,7 @@ import {
   Alert,
   FlatList,
   SafeAreaView,
+  Text,
   TextInput,
   TouchableOpacity,
   View,
@@ -61,8 +62,8 @@ const SearchScreen = props => {
             } else {
               Toast.show({
                 type: 'info',
-                text1: '' + searchString,
-                text2: 'No (more) results returned.',
+                text1: 'Search Text: `' + searchString + '`',
+                text2: 'No matching or additional recipe results found!',
               });
               setFound(false);
               return;
@@ -80,6 +81,19 @@ const SearchScreen = props => {
 
   const renderStickyPager = () => {
     return found && <ListPager loading={loading} metaData={metaData} />;
+  };
+
+  const renderEmptyList = () => {
+    return (
+      <Text
+        style={[
+          Styles.safeContainer,
+          Styles.centerAlign,
+          Styles.messageInfoText,
+        ]}>
+        No matching recipe results found!
+      </Text>
+    );
   };
 
   const ItemView = ({item, index}) => {
@@ -131,17 +145,17 @@ const SearchScreen = props => {
         />
         {dataSource && (
           <FlatList
+            contentContainerStyle={{flexGrow: 1}}
             data={dataSource}
             keyExtractor={(item, index) => index.toString()}
             enableEmptySections={true}
             renderItem={ItemView}
             // ListHeaderComponent={renderStickyHeader()}
             // stickyHeaderIndices={[0]}
+            ListEmptyComponent={renderEmptyList}
             ListFooterComponent={renderStickyPager}
             onEndReachedThreshold={0.1}
             onEndReached={info => {
-              console.log('onEndReached>>>>>>> ', info);
-              console.log('onEndReached>>>>>>> ', searchString);
               fetchData();
             }}
           />

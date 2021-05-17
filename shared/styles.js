@@ -9,7 +9,11 @@ export const Styles = StyleSheet.create({
   screenContainer: {
     padding: Constants.__EXTRA_PADDING__,
   },
-  centerAlign: {alignItems: 'center'},
+  centerAlign: {
+    alignItems: 'center',
+    textAlign: 'center',
+    textAlignVertical: 'center',
+  },
   flexRow: {
     flexDirection: 'row',
     height: Constants.__SMALL_ELEM_SIZE__,
@@ -39,6 +43,10 @@ export const Styles = StyleSheet.create({
     margin: Constants.__EXTRA_MARGIN__,
     paddingVertical: Constants.__EXTRA_SMALL_ELEM_SIZE__,
     opacity: 0.75,
+  },
+  messageInfoText: {
+    fontSize: Constants.__DEFAULT_FONT_SIZE__,
+    fontWeight: Constants.__FONT_WEIGHT_NORMAL__,
   },
   /**SPECIFIC STYLES*/
   authContainer: {
