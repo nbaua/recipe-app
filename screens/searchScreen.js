@@ -1,12 +1,21 @@
 /* eslint-disable react-native/no-inline-styles */
 import AsyncStorage from '@react-native-community/async-storage';
 import React, {useEffect, useState} from 'react';
-import {FlatList, SafeAreaView, Text, TextInput, View} from 'react-native';
+import {
+  FlatList,
+  Image,
+  SafeAreaView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import Toast from 'react-native-toast-message';
 import {Slide} from '../shared/components/carousel/slide';
 import ListPager from '../shared/components/listPager';
 import Constants from '../shared/constants';
 import Gateway from '../shared/gateway';
+import resources from '../shared/resources';
 import {Styles} from '../shared/styles';
 import utils from '../shared/utils';
 
@@ -16,6 +25,7 @@ const SearchScreen = props => {
   const [dataSource, setDataSource] = useState([]);
   const [metaData, setMetaData] = useState();
   const [searchString, setSearchString] = useState('');
+  const [tempString, setTempString] = useState('');
   const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
@@ -103,34 +113,82 @@ const SearchScreen = props => {
     );
   };
 
+  const resetState = () => {
+    setCurrentPage(0);
+    setDataSource([]);
+    setMetaData(null);
+    setLoading(false);
+  };
+
+  const onSubmitSearch = event => {
+    resetState();
+    setSearchString(tempString);
+  };
+
+  const onClearSearch = () => {
+    resetState();
+    setTempString('');
+    setSearchString('');
+  };
+
   return (
     <SafeAreaView style={Styles.itemListSafeContainer}>
       <View style={Styles.itemListSafeContainer}>
-        <TextInput
-          style={[
-            Styles.authInputText,
-            {
-              color: Constants.__DEFAULT_TEXT_COLOR__,
-              height: Constants.__SMALL_ELEM_SIZE__,
-              minHeight: Constants.__SMALL_ELEM_SIZE__,
-              maxHeight: Constants.__SMALL_ELEM_SIZE__,
-              backgroundColor: Constants.__DEFAULT_BACKGROUND_COLOR__,
-              marginVertical: Constants.__DEFAULT_MARGIN__,
-            },
-          ]}
-          defaultValue={searchString}
-          placeholder="Type something to search"
-          returnKeyType="search"
-          autoCapitalize="none"
-          blurOnSubmit={false}
-          onSubmitEditing={event => {
-            setDataSource([]);
-            setMetaData(null);
-            setCurrentPage(0);
-            setLoading(false);
-            setSearchString(event.nativeEvent.text);
-          }}
-        />
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
+            alignItems: 'flex-start',
+          }}>
+          <TextInput
+            style={[
+              Styles.authInputText,
+              {
+                color: Constants.__DEFAULT_TEXT_COLOR__,
+                height: Constants.__SMALL_ELEM_SIZE__,
+                minHeight: Constants.__SMALL_ELEM_SIZE__,
+                maxHeight: Constants.__SMALL_ELEM_SIZE__,
+                backgroundColor: Constants.__DEFAULT_BACKGROUND_COLOR__,
+                marginVertical: Constants.__DEFAULT_MARGIN__,
+              },
+            ]}
+            defaultValue={tempString}
+            placeholder="Type something to search"
+            returnKeyType="search"
+            autoCapitalize="none"
+            blurOnSubmit={false}
+            onChangeText={v => setTempString(v)}
+            onSubmitEditing={onSubmitSearch}
+          />
+          {searchString === '' && (
+            <TouchableOpacity onPress={onSubmitSearch}>
+              <Image
+                style={{
+                  width: Constants.__EXTRA_SMALL_ELEM_SIZE__,
+                  height: Constants.__EXTRA_SMALL_ELEM_SIZE__,
+                  marginVertical: Constants.__DEFAULT_MARGIN__ * 2,
+                  marginHorizontal: Constants.__EXTRA_MARGIN__,
+                  tintColor: Constants.__ALTERNATE_BACKGROUND_COLOR__,
+                }}
+                source={resources.search}
+              />
+            </TouchableOpacity>
+          )}
+          {searchString !== '' && (
+            <TouchableOpacity onPress={onClearSearch}>
+              <Image
+                style={{
+                  width: Constants.__EXTRA_SMALL_ELEM_SIZE__,
+                  height: Constants.__EXTRA_SMALL_ELEM_SIZE__,
+                  marginVertical: Constants.__DEFAULT_MARGIN__ * 2,
+                  marginHorizontal: Constants.__EXTRA_MARGIN__,
+                  tintColor: Constants.__ALTERNATE_BACKGROUND_COLOR__,
+                }}
+                source={resources.toast_error}
+              />
+            </TouchableOpacity>
+          )}
+        </View>
         {dataSource && (
           <FlatList
             contentContainerStyle={{flexGrow: 1}}
