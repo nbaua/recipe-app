@@ -152,6 +152,12 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+        release {
+            storeFile file('recipe_app.keystore')
+            storePassword 'Pass$123'
+            keyAlias 'recipe_app'
+            keyPassword 'Pass$123'
+        }
     }
     buildTypes {
         debug {
