@@ -1,15 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import AsyncStorage from '@react-native-community/async-storage';
 import React, {useEffect, useState} from 'react';
-import {
-  Alert,
-  FlatList,
-  SafeAreaView,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {FlatList, SafeAreaView, Text, TextInput, View} from 'react-native';
 import Toast from 'react-native-toast-message';
 import {Slide} from '../shared/components/carousel/slide';
 import ListPager from '../shared/components/listPager';
@@ -99,11 +91,7 @@ const SearchScreen = props => {
   const ItemView = ({item, index}) => {
     const id = item._id;
     return (
-      <TouchableOpacity
-        style={Styles.itemListContainer}
-        onPress={x => {
-          Alert.alert(id);
-        }}>
+      <View style={Styles.itemListContainer}>
         <Slide
           key={index + id}
           nav={props.navigation} //need navigation
@@ -111,7 +99,7 @@ const SearchScreen = props => {
           data={item}
           isLarge={true}
         />
-      </TouchableOpacity>
+      </View>
     );
   };
 
