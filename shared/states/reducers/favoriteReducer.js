@@ -4,10 +4,14 @@ const initialState = {
 const favoriteReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'add': {
-      return {
-        ...state,
-        favoriteRecipeIds: [...state.favoriteRecipeIds, action.payload],
-      };
+      if (state.favoriteRecipeIds.indexOf(action.payload) === -1) {
+        return {
+          ...state,
+          favoriteRecipeIds: [...state.favoriteRecipeIds, action.payload],
+        };
+      } else {
+        return state;
+      }
     }
     case 'rem': {
       return {
