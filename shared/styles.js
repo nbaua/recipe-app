@@ -65,8 +65,8 @@ export const Styles = StyleSheet.create({
   },
   authLogo: {
     resizeMode: 'contain',
-    width: Constants.__MEDIUM_LOGO_DIMS_PERCENT__,
-    height: Constants.__MEDIUM_LOGO_DIMS_PERCENT__,
+    width: Constants.__LOW_LOGO_DIMS_PERCENT__,
+    height: Constants.__LOW_LOGO_DIMS_PERCENT__,
     marginHorizontal: Constants.__EXTRA_MARGIN__ * 2,
     marginVertical: Constants.__EXTRA_MARGIN__,
   },

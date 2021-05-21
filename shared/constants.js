@@ -58,7 +58,7 @@ export default {
   __FONT_WEIGHT_NORMAL__: Platform.OS === 'ios' ? 400 : 'normal',
   __FONT_WEIGHT_BOLD__: Platform.OS === 'ios' ? 700 : 'bold',
 
-  __LOW_LOGO_DIMS_PERCENT__: '25%',
+  __LOW_LOGO_DIMS_PERCENT__: '35%',
   __MEDIUM_LOGO_DIMS_PERCENT__: '50%',
   __HIGH_LOGO_DIMS_PERCENT__: '75%',
 
