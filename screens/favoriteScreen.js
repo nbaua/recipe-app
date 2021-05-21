@@ -1,19 +1,83 @@
-import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
+import React, {useEffect, useState} from 'react';
+import {
+  Alert,
+  FlatList,
+  SafeAreaView,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {useSelector} from 'react-redux';
+import {Slide} from '../shared/components/carousel/slide';
+import Gateway from '../shared/gateway';
+import {Styles} from '../shared/styles';
+import utils from '../shared/utils';
 
-const FavoriteScreen = () => {
+const FavoriteScreen = props => {
+  const ids = useSelector(state => state.favoriteRecipeIds);
+
+  const [loading, setLoading] = useState(true);
+  const [userId, setUserId] = useState('');
+  const [dataSource, setDataSource] = useState([]);
+
+  useEffect(() => {
+    AsyncStorage.getItem('id').then(id => {
+      setUserId(id);
+      fetchData();
+    });
+  }, []);
+
+  const fetchData = () => {
+    AsyncStorage.getItem('access_token').then(token => {
+      if (token) {
+        setLoading(true);
+        fetch(
+          Gateway.__FAVORITE_RECIPES_BY_USER_ID_URL__.replace('{ID}', userId),
+          utils.injectGetRequestHeader(token),
+        )
+          .then(response => response.json())
+          .then(responseJson => {
+            setDataSource([...dataSource, ...responseJson[0].favoriteRecipes]);
+            setLoading(false);
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      }
+    });
+  };
+
+  const ItemView = ({item, index}) => {
+    const id = item._id;
+    return (
+      <TouchableOpacity
+        style={Styles.itemListContainer}
+        onPress={x => {
+          Alert.alert(id);
+        }}>
+        <Slide
+          key={index + id}
+          nav={props.navigation} //need navigation
+          autogrow={true}
+          data={item}
+          isLarge={true}
+        />
+      </TouchableOpacity>
+    );
+  };
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.caption}>This is just a dummy text for Favorite</Text>
-      <Text style={styles.matter}>This is just a dummy text for Favorite</Text>
-    </View>
+    <SafeAreaView style={Styles.itemListSafeContainer}>
+      <View style={Styles.itemListSafeContainer}>
+        <FlatList
+          data={dataSource}
+          keyExtractor={(item, index) => index.toString()}
+          enableEmptySections={true}
+          renderItem={ItemView}
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 
 export default FavoriteScreen;
-
-const styles = StyleSheet.create({
-  container: {flex: 1},
-  caption: {fontFamily: 'VarelaRound-Regular', fontSize: 25},
-  matter: {fontFamily: 'WorkSans-Regular', fontSize: 15},
-});
