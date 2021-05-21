@@ -18,6 +18,7 @@ export function logoutAndClearSession(navigation) {
     type: 'info',
     text1: 'Session Expired',
     text2: 'Please login again.',
+    visibilityTime: 2000,
   });
   navigation.replace('Auth');
 }

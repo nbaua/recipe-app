@@ -66,6 +66,7 @@ const SearchScreen = props => {
                 type: 'info',
                 text1: 'Search Text: `' + searchString + '`',
                 text2: 'No matching or additional recipe results found!',
+                visibilityTime: 2000,
               });
               setFound(false);
               return;

@@ -24,12 +24,12 @@ const toastConfig = {
         fontWeight: Constants.__FONT_WEIGHT_NORMAL__,
       }}
       leadingIconStyle={{
-        width: Constants.__MEDIUM_ELEM_SIZE__,
-        height: Constants.__MEDIUM_ELEM_SIZE__,
+        width: Constants.__SMALL_ELEM_SIZE__,
+        height: Constants.__SMALL_ELEM_SIZE__,
         tintColor: Constants.__PRIMARY_ERROR_TEXT_COLOR__,
       }}
       leadingIconContainerStyle={{
-        paddingHorizontal: Constants.__EXTRA_PADDING__ * 2.5,
+        paddingHorizontal: Constants.__EXTRA_PADDING__ * 1.25,
       }}
       text1={text1}
       text2={text2}
@@ -56,12 +56,12 @@ const toastConfig = {
         fontWeight: Constants.__FONT_WEIGHT_NORMAL__,
       }}
       leadingIconStyle={{
-        width: Constants.__MEDIUM_ELEM_SIZE__,
-        height: Constants.__MEDIUM_ELEM_SIZE__,
+        width: Constants.__SMALL_ELEM_SIZE__,
+        height: Constants.__SMALL_ELEM_SIZE__,
         tintColor: Constants.__PRIMARY_SUCCESS_TEXT_COLOR__,
       }}
       leadingIconContainerStyle={{
-        paddingHorizontal: Constants.__EXTRA_PADDING__ * 2.5,
+        paddingHorizontal: Constants.__EXTRA_PADDING__ * 1.25,
       }}
       text1={text1}
       text2={text2}
@@ -88,12 +88,12 @@ const toastConfig = {
         fontWeight: Constants.__FONT_WEIGHT_NORMAL__,
       }}
       leadingIconStyle={{
-        width: Constants.__MEDIUM_ELEM_SIZE__,
-        height: Constants.__MEDIUM_ELEM_SIZE__,
+        width: Constants.__SMALL_ELEM_SIZE__,
+        height: Constants.__SMALL_ELEM_SIZE__,
         tintColor: Constants.__PRIMARY_INFO_TEXT_COLOR__,
       }}
       leadingIconContainerStyle={{
-        paddingHorizontal: Constants.__EXTRA_PADDING__ * 2.5,
+        paddingHorizontal: Constants.__EXTRA_PADDING__ * 1.25,
       }}
       text1={text1}
       text2={text2}

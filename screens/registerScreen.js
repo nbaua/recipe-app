@@ -40,6 +40,7 @@ const RegisterScreen = props => {
         type: 'error',
         text1: 'Error Occurred',
         text2: 'Please enter e-mail.',
+        visibilityTime: 2000,
       });
       return;
     }
@@ -56,6 +57,7 @@ const RegisterScreen = props => {
         type: 'error',
         text1: 'Error Occurred',
         text2: 'Both Email Fields Should Match.',
+        visibilityTime: 2000,
       });
       return;
     }
@@ -65,6 +67,7 @@ const RegisterScreen = props => {
         type: 'error',
         text1: 'Error Occurred',
         text2: 'Please enter password.',
+        visibilityTime: 2000,
       });
       return;
     }

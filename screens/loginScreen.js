@@ -37,6 +37,7 @@ const LoginScreen = ({navigation}) => {
         type: 'error',
         text1: 'Error Occurred',
         text2: 'Please enter e-mail.',
+        visibilityTime: 2000,
       });
       return;
     }
@@ -45,6 +46,7 @@ const LoginScreen = ({navigation}) => {
         type: 'error',
         text1: 'Error Occurred',
         text2: 'Please enter password.',
+        visibilityTime: 2000,
       });
       return;
     }
@@ -83,6 +85,7 @@ const LoginScreen = ({navigation}) => {
             type: 'error',
             text1: 'Error Occurred',
             text2: 'Please check your email id or password',
+            visibilityTime: 2000,
           });
         }
       })
