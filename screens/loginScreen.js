@@ -12,13 +12,17 @@ import {
   View,
 } from 'react-native';
 import Toast from 'react-native-toast-message';
+import {useDispatch} from 'react-redux';
 import Loader from '../shared/components/loader';
 import Constants from '../shared/constants';
 import Gateway from '../shared/gateway';
 import Resources from '../shared/resources';
+import {addToFavorite} from '../shared/states/actions/favoriteActions';
 import {Styles} from '../shared/styles';
 
 const LoginScreen = ({navigation}) => {
+  const dispatch = useDispatch();
+
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -60,10 +64,18 @@ const LoginScreen = ({navigation}) => {
       .then(response => response.json())
       .then(res => {
         setLoading(false);
-        if (res.access_token) {
+
+        if (res.fr) {
+          res.fr.map(id => {
+            dispatch(addToFavorite(id));
+          });
+        }
+
+        if (res.token) {
           AsyncStorage.setItem('email', userEmail);
-          AsyncStorage.setItem('access_token', res.access_token);
-          // console.log(res.access_token);
+          AsyncStorage.setItem('access_token', res.token);
+          AsyncStorage.setItem('id', res.id);
+          // AsyncStorage.setItem('fr', res.fr);
           navigation.replace('Landing');
         } else {
           setErrortext(res.msg);
