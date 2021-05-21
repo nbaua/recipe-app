@@ -14,4 +14,7 @@ export default {
   __SEARCH_RECIPES_BY_TAG_URL__: __BASE_URL__.concat(
     'filter/search?tag={TAG}&page={PAGE}&limit={LIMIT}',
   ),
+  __FAVORITE_RECIPES_BY_USER_ID_URL__: __BASE_URL__.concat('favorite?id={ID}'),
+  __ADD_FAVORITE_RECIPE_BY_IDS_URL__: __BASE_URL__.concat('favorite/add'),
+  __REMOVE_FAVORITE_RECIPE_BY_IDS_URL__: __BASE_URL__.concat('favorite/remove'),
 };
