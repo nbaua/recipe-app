@@ -17,27 +17,25 @@ const FavoriteScreen = props => {
   const ids = useSelector(state => state.favoriteRecipeIds);
 
   const [loading, setLoading] = useState(true);
-  const [userId, setUserId] = useState('');
   const [dataSource, setDataSource] = useState([]);
 
   useEffect(() => {
     AsyncStorage.getItem('id').then(id => {
-      setUserId(id);
-      fetchData();
+      fetchData(id);
     });
   }, []);
 
-  const fetchData = () => {
+  const fetchData = id => {
     AsyncStorage.getItem('access_token').then(token => {
       if (token) {
         setLoading(true);
         fetch(
-          Gateway.__FAVORITE_RECIPES_BY_USER_ID_URL__.replace('{ID}', userId),
+          Gateway.__FAVORITE_RECIPES_BY_USER_ID_URL__.replace('{ID}', id),
           utils.injectGetRequestHeader(token),
         )
           .then(response => response.json())
           .then(responseJson => {
-            setDataSource([...dataSource, ...responseJson[0].favoriteRecipes]);
+            setDataSource(responseJson[0].favoriteRecipes);
             setLoading(false);
           })
           .catch(error => {
