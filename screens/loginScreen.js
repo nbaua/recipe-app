@@ -12,7 +12,6 @@ import {
   View,
 } from 'react-native';
 import Toast from 'react-native-toast-message';
-import {useDispatch} from 'react-redux';
 import Loader from '../shared/components/loader';
 import Constants from '../shared/constants';
 import Gateway from '../shared/gateway';
@@ -20,8 +19,6 @@ import Resources from '../shared/resources';
 import {Styles} from '../shared/styles';
 
 const LoginScreen = ({navigation}) => {
-  const dispatch = useDispatch();
-
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [loading, setLoading] = useState(false);

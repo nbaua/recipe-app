@@ -7,15 +7,12 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {useSelector} from 'react-redux';
 import {Slide} from '../shared/components/carousel/slide';
 import Gateway from '../shared/gateway';
 import {Styles} from '../shared/styles';
 import utils from '../shared/utils';
 
 const FavoriteScreen = props => {
-  const ids = useSelector(state => state.favoriteRecipeIds);
-
   const [loading, setLoading] = useState(true);
   const [dataSource, setDataSource] = useState([]);
 

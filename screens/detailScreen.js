@@ -12,7 +12,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
 import Ingredient from '../shared/components/ingredient';
 import Instruction from '../shared/components/instruction';
 import Tags from '../shared/components/tags';
@@ -29,7 +28,6 @@ const DetailScreen = ({route, navigation}) => {
   const [error, setError] = React.useState('');
   const [viewSteps, setViewSteps] = React.useState(0);
   const [recipeDetail, setRecipeDetail] = React.useState([]);
-  const dispatch = useDispatch();
 
   const styles = StyleSheet.create({
     container: {alignContent: 'flex-start', flex: 1},
@@ -102,11 +100,9 @@ const DetailScreen = ({route, navigation}) => {
       height: Constants.__EXTRA_SMALL_ELEM_SIZE__,
     },
   });
-  const ids = useSelector(state => state.favoriteRecipeIds);
 
   React.useEffect(() => {
     setLoading(true);
-    setIsFavorite(ids.indexOf(id) > -1 ? true : false);
     AsyncStorage.getItem('access_token').then(token => {
       if (token) {
         fetch(
