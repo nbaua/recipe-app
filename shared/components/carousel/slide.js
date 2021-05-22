@@ -62,8 +62,11 @@ export const Slide = (props: any) => {
     },
     socialLeft: {
       flex: 1,
-      flexDirection: 'row',
+      flexDirection: 'column',
       backgroundColor: Constants.__ALTERNATE_TRANS_BACKGROUND_COLOR__,
+      alignItems: 'center',
+      textAlign: 'center',
+      textAlignVertical: 'center',
     },
     socialCenter: {
       flex: 4,
@@ -71,8 +74,11 @@ export const Slide = (props: any) => {
     },
     socialRight: {
       flex: 1,
-      flexDirection: 'row-reverse',
+      flexDirection: 'column',
       backgroundColor: Constants.__ALTERNATE_TRANS_BACKGROUND_COLOR__,
+      alignItems: 'center',
+      textAlign: 'center',
+      textAlignVertical: 'center',
     },
     social: {
       color: Constants.__ALTERNATE_TEXT_COLOR__,

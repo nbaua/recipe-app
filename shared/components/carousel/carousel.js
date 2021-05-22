@@ -61,8 +61,9 @@ export const Carousel = (props: any) => {
     },
     bulletText: {
       color: Constants.__ALTERNATE_TEXT_COLOR__,
-      fontSize: Constants.__SMALL_FONT_SIZE__,
-      marginVertical: Constants.__DEFAULT_MARGIN__,
+      fontSize: Constants.__EXTRA_LARGE_FONT_SIZE__,
+      fontWeight: Constants.__FONT_WEIGHT_BOLD__,
+      marginVertical: Constants.__DEFAULT_MARGIN__ * -2.25,
       paddingHorizontal: Constants.__DEFAULT_PADDING__,
     },
   });
@@ -144,7 +145,7 @@ export const Carousel = (props: any) => {
           onPress={p => {
             nav.navigate('Listing');
           }}>
-          {/* <Text style={styles.bulletText}>VIEW MORE</Text> */}
+          <Text style={styles.bulletText}>»</Text>
         </TouchableOpacity>
       </View>
     </View>
