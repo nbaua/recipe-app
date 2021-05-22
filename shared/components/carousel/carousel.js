@@ -144,7 +144,7 @@ export const Carousel = (props: any) => {
           onPress={p => {
             nav.navigate('Listing');
           }}>
-          <Text style={styles.bulletText}>VIEW MORE</Text>
+          {/* <Text style={styles.bulletText}>VIEW MORE</Text> */}
         </TouchableOpacity>
       </View>
     </View>
