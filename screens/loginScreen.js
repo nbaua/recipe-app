@@ -17,7 +17,6 @@ import Loader from '../shared/components/loader';
 import Constants from '../shared/constants';
 import Gateway from '../shared/gateway';
 import Resources from '../shared/resources';
-import {addToFavorite} from '../shared/states/actions/favoriteActions';
 import {Styles} from '../shared/styles';
 
 const LoginScreen = ({navigation}) => {
@@ -67,11 +66,11 @@ const LoginScreen = ({navigation}) => {
       .then(res => {
         setLoading(false);
 
-        if (res.fr) {
-          res.fr.map(id => {
-            dispatch(addToFavorite(id));
-          });
-        }
+        // if (res.fr) {
+        //   res.fr.map(id => {
+        //     dispatch(addToFavorite(id));
+        //   });
+        // }
 
         if (res.token) {
           AsyncStorage.setItem('email', userEmail);

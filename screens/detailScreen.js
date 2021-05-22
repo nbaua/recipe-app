@@ -20,10 +20,6 @@ import Times from '../shared/components/times';
 import Constants from '../shared/constants';
 import Gateway from '../shared/gateway';
 import Resources from '../shared/resources';
-import {
-  addToFavorite,
-  removeFromFavorite,
-} from '../shared/states/actions/favoriteActions';
 import utils from '../shared/utils';
 
 const DetailScreen = ({route, navigation}) => {
@@ -185,9 +181,6 @@ const DetailScreen = ({route, navigation}) => {
           <TouchableOpacity
             onPress={() => {
               setIsFavorite(!isFavorite);
-              isFavorite
-                ? dispatch(addToFavorite(id))
-                : dispatch(removeFromFavorite(id));
             }}>
             <Image
               style={styles.favIcon}

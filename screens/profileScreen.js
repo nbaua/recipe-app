@@ -21,7 +21,7 @@ const ProfileScreen = ({navigation}) => {
       AsyncStorage.getItem('email').then(value => {
         setEmail(value);
       });
-    }, 1000);
+    }, 300);
   }, []);
 
   const handleSubmitPress = () => {
