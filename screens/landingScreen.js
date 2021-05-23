@@ -52,9 +52,33 @@ const LandingScreen = ({navigation}) => {
               setError('');
             }
           });
+
+        fetchFavoritesData(token);
       }
     });
   }, []);
+
+  const fetchFavoritesData = token => {
+    setLoading(true);
+    utils.getObject('id').then(id => {
+      if (token !== null) {
+        fetch(
+          Gateway.__FAVORITE_RECIPES_BY_USER_ID_URL__.replace('{ID}', id),
+          utils.injectGetRequestHeader(token),
+        )
+          .then(response => response.json())
+          .then(responseJson => {
+            utils.setObject('fr', responseJson[0].favoriteRecipes);
+            setLoading(false);
+          })
+          .catch(err => {
+            setLoading(false);
+            utils.setObject('fr', null);
+            console.error(err);
+          });
+      }
+    });
+  };
 
   return (
     <SafeAreaView style={Styles.safeContainer}>
