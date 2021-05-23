@@ -1,5 +1,4 @@
 /* eslint-disable react-native/no-inline-styles */
-import AsyncStorage from '@react-native-community/async-storage';
 import React, {useState} from 'react';
 import {
   FlatList,
@@ -103,7 +102,7 @@ const DetailScreen = ({route, navigation}) => {
 
   React.useEffect(() => {
     setLoading(true);
-    AsyncStorage.getItem('access_token').then(token => {
+    utils.getAppToken().then(token => {
       if (token) {
         fetch(
           Gateway.__GET_DETAILS_BY_ID_URL__.replace('{ID}', id),

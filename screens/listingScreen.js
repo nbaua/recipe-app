@@ -1,4 +1,3 @@
-import AsyncStorage from '@react-native-community/async-storage';
 import React, {useEffect, useState} from 'react';
 import {
   Alert,
@@ -25,7 +24,7 @@ const ListingScreen = props => {
   }, []);
 
   const fetchData = () => {
-    AsyncStorage.getItem('access_token').then(token => {
+    utils.getAppToken().then(token => {
       if (token) {
         setLoading(true);
         fetch(

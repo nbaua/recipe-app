@@ -1,4 +1,3 @@
-import AsyncStorage from '@react-native-community/async-storage';
 import React, {useState} from 'react';
 import {SafeAreaView, ScrollView, View} from 'react-native';
 import {Carousel} from '../shared/components/carousel/carousel';
@@ -30,7 +29,7 @@ const LandingScreen = ({navigation}) => {
   ];
   React.useEffect(() => {
     setLoading(true);
-    AsyncStorage.getItem('access_token').then(token => {
+    utils.getAppToken().then(token => {
       if (token) {
         Promise.all(
           urls.map(url => fetch(url, utils.injectGetRequestHeader(token))),

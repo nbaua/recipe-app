@@ -1,4 +1,3 @@
-import AsyncStorage from '@react-native-community/async-storage';
 import React, {useEffect, useState} from 'react';
 import {
   Alert,
@@ -17,28 +16,28 @@ const FavoriteScreen = props => {
   const [dataSource, setDataSource] = useState([]);
 
   useEffect(() => {
-    AsyncStorage.getItem('id').then(id => {
-      fetchData(id);
-    });
+    fetchData();
   }, []);
 
-  const fetchData = id => {
-    AsyncStorage.getItem('access_token').then(token => {
-      if (token) {
-        setLoading(true);
-        fetch(
-          Gateway.__FAVORITE_RECIPES_BY_USER_ID_URL__.replace('{ID}', id),
-          utils.injectGetRequestHeader(token),
-        )
-          .then(response => response.json())
-          .then(responseJson => {
-            setDataSource(responseJson[0].favoriteRecipes);
-            setLoading(false);
-          })
-          .catch(error => {
-            console.error(error);
-          });
-      }
+  const fetchData = () => {
+    utils.getObject('id').then(id => {
+      utils.getAppToken().then(token => {
+        if (token) {
+          setLoading(true);
+          fetch(
+            Gateway.__FAVORITE_RECIPES_BY_USER_ID_URL__.replace('{ID}', id),
+            utils.injectGetRequestHeader(token),
+          )
+            .then(response => response.json())
+            .then(responseJson => {
+              setDataSource(responseJson[0].favoriteRecipes);
+              setLoading(false);
+            })
+            .catch(error => {
+              console.error(error);
+            });
+        }
+      });
     });
   };
 

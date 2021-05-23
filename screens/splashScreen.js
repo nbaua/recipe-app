@@ -1,21 +1,20 @@
-import AsyncStorage from '@react-native-community/async-storage';
 import React, {useEffect, useState} from 'react';
 import {Image, SafeAreaView, Text, View} from 'react-native';
 import Resources from '../shared/resources';
 import {Styles} from '../shared/styles';
+import utils from '../shared/utils';
 
 const SplashScreen = ({navigation}) => {
-  //State for ActivityIndicator animation
   const [animating, setAnimating] = useState(true);
 
   useEffect(() => {
     setTimeout(() => {
       setAnimating(false);
       //if authenticated, Land or else Login
-      AsyncStorage.getItem('access_token').then(value =>
-        navigation.replace(value === null ? 'Auth' : 'Landing'),
-      );
-    }, 3000);
+      utils
+        .getAppToken()
+        .then(value => navigation.replace(value === null ? 'Auth' : 'Landing'));
+    }, 1000);
   }, []);
 
   return (
