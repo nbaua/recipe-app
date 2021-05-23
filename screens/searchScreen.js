@@ -159,6 +159,7 @@ const SearchScreen = props => {
             blurOnSubmit={false}
             onChangeText={v => setTempString(v)}
             onSubmitEditing={onSubmitSearch}
+            editable={searchString === ''}
           />
           {searchString === '' && (
             <TouchableOpacity onPress={onSubmitSearch}>
