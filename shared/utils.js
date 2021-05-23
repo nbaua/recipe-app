@@ -23,4 +23,38 @@ export function logoutAndClearSession(navigation) {
   navigation.replace('Auth');
 }
 
-export default {injectGetRequestHeader, logoutAndClearSession};
+export async function getAppToken() {
+  return await AsyncStorage.getItem('access_token');
+}
+
+export async function getObject(objectKey) {
+  const result = await AsyncStorage.getItem(objectKey);
+  return _isJsonString(result) === true ? JSON.parse(result) : result;
+}
+
+export function setObject(objectKey, objectValue) {
+  let parsedObject = _isObject(objectValue)
+    ? JSON.stringify(objectValue)
+    : objectValue;
+  AsyncStorage.setItem(objectKey, parsedObject);
+  return true;
+}
+
+function _isJsonString(str) {
+  try {
+    JSON.parse(str);
+  } catch (e) {
+    return false;
+  }
+  return true;
+}
+function _isObject(item) {
+  return typeof item === 'object' && !Array.isArray(item) && item !== null;
+}
+export default {
+  injectGetRequestHeader,
+  logoutAndClearSession,
+  getAppToken,
+  getObject,
+  setObject,
+};
