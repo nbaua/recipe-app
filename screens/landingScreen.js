@@ -68,7 +68,7 @@ const LandingScreen = ({navigation}) => {
         )
           .then(response => response.json())
           .then(responseJson => {
-            utils.setObject('fr', responseJson[0].favoriteRecipes);
+            utils.setObject('fr', responseJson);
             setLoading(false);
           })
           .catch(err => {
