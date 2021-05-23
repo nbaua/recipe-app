@@ -7,7 +7,6 @@ import {
   View,
 } from 'react-native';
 import {Slide} from '../shared/components/carousel/slide';
-import Gateway from '../shared/gateway';
 import {Styles} from '../shared/styles';
 import utils from '../shared/utils';
 
@@ -16,28 +15,15 @@ const FavoriteScreen = props => {
   const [dataSource, setDataSource] = useState([]);
 
   useEffect(() => {
-    fetchData();
+    fetchDataFromStorage();
   }, []);
 
-  const fetchData = () => {
-    utils.getObject('id').then(id => {
-      utils.getAppToken().then(token => {
-        if (token) {
-          setLoading(true);
-          fetch(
-            Gateway.__FAVORITE_RECIPES_BY_USER_ID_URL__.replace('{ID}', id),
-            utils.injectGetRequestHeader(token),
-          )
-            .then(response => response.json())
-            .then(responseJson => {
-              setDataSource(responseJson[0].favoriteRecipes);
-              setLoading(false);
-            })
-            .catch(error => {
-              console.error(error);
-            });
-        }
-      });
+  const fetchDataFromStorage = () => {
+    utils.getObject('fr').then(fr => {
+      if (fr !== null) {
+        setDataSource(fr);
+        setLoading(false);
+      }
     });
   };
 
