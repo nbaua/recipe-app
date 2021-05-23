@@ -49,7 +49,10 @@ function _isJsonString(str) {
   return true;
 }
 function _isObject(item) {
-  return typeof item === 'object' && !Array.isArray(item) && item !== null;
+  return (
+    (typeof item === 'object' && item !== null) ||
+    (Array.isArray(item) && item !== null)
+  );
 }
 export default {
   injectGetRequestHeader,
