@@ -68,12 +68,12 @@ const LandingScreen = ({navigation}) => {
         )
           .then(response => response.json())
           .then(responseJson => {
-            utils.setObject('fr', responseJson);
+            utils.setObject('fry', responseJson);
             setLoading(false);
           })
           .catch(err => {
             setLoading(false);
-            utils.setObject('fr', null);
+            utils.setObject('fry', null);
             console.error(err);
           });
       }

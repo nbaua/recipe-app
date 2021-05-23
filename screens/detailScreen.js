@@ -26,7 +26,7 @@ const DetailScreen = ({route, navigation}) => {
   const [loading, setLoading] = useState(true);
   const [userId, setUserId] = useState('');
   const [userToken, setUserToken] = useState('');
-  const [isFavorite, setIsFavorite] = useState(true);
+  const [isFavorite, setIsFavorite] = useState(false);
   const [error, setError] = React.useState('');
   const [viewSteps, setViewSteps] = React.useState(0);
   const [recipeDetail, setRecipeDetail] = React.useState([]);
@@ -108,6 +108,10 @@ const DetailScreen = ({route, navigation}) => {
 
     utils.getObject('id').then(uid => {
       setUserId(uid);
+    });
+
+    utils.getObject('fr').then(fr => {
+      setIsFavorite(fr.includes(id));
     });
 
     utils.getAppToken().then(token => {
@@ -255,9 +259,19 @@ const addRemoveFavorite = (mode, authToken, userId, recipeId) => {
   )
     .then(response => response.json())
     .then(res => {
-      const result = utils.setObject('fr', res);
+      const result = utils.setObject('fry', res);
       if (result) {
-        console.log('..................', res);
+        //also update the single ids
+        utils.getObject('fr').then(fr => {
+          if (mode) {
+            utils.setObject('fr', [...fr, recipeId]);
+          } else {
+            utils.setObject(
+              'fr',
+              fr.filter(r => r !== recipeId),
+            );
+          }
+        });
         Toast.show({
           type: 'info',
           text1: '',

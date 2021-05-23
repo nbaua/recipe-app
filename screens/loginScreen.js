@@ -17,6 +17,7 @@ import Constants from '../shared/constants';
 import Gateway from '../shared/gateway';
 import Resources from '../shared/resources';
 import {Styles} from '../shared/styles';
+import utils from '../shared/utils';
 
 const LoginScreen = ({navigation}) => {
   const [userEmail, setUserEmail] = useState('');
@@ -63,17 +64,11 @@ const LoginScreen = ({navigation}) => {
       .then(res => {
         setLoading(false);
 
-        // if (res.fr) {
-        //   res.fr.map(id => {
-        //     dispatch(addToFavorite(id));
-        //   });
-        // }
-
         if (res.token) {
           AsyncStorage.setItem('email', userEmail);
           AsyncStorage.setItem('access_token', res.token);
           AsyncStorage.setItem('id', res.id);
-          // AsyncStorage.setItem('fr', res.fr);
+          utils.setObject('fr', res.fr);
           navigation.replace('Landing');
         } else {
           setErrortext(res.msg);

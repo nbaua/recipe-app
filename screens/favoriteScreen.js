@@ -21,8 +21,7 @@ const FavoriteScreen = props => {
   }, [isFocused]);
 
   const fetchDataFromStorage = () => {
-    utils.getObject('fr').then(fr => {
-      console.log(fr);
+    utils.getObject('fry').then(fr => {
       if (fr !== null) {
         setDataSource(fr);
         setLoading(false);
