@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import Toast from 'react-native-toast-message';
 import Ingredient from '../shared/components/ingredient';
 import Instruction from '../shared/components/instruction';
 import Tags from '../shared/components/tags';
@@ -23,6 +24,8 @@ import utils from '../shared/utils';
 const DetailScreen = ({route, navigation}) => {
   const {id, category} = route.params;
   const [loading, setLoading] = useState(true);
+  const [userId, setUserId] = useState('');
+  const [userToken, setUserToken] = useState('');
   const [isFavorite, setIsFavorite] = useState(true);
   const [error, setError] = React.useState('');
   const [viewSteps, setViewSteps] = React.useState(0);
@@ -102,8 +105,14 @@ const DetailScreen = ({route, navigation}) => {
 
   React.useEffect(() => {
     setLoading(true);
+
+    utils.getObject('id').then(uid => {
+      setUserId(uid);
+    });
+
     utils.getAppToken().then(token => {
       if (token) {
+        setUserToken(token);
         fetch(
           Gateway.__GET_DETAILS_BY_ID_URL__.replace('{ID}', id),
           utils.injectGetRequestHeader(token),
@@ -175,6 +184,12 @@ const DetailScreen = ({route, navigation}) => {
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
+              addRemoveFavorite(
+                !isFavorite,
+                userToken,
+                userId,
+                recipeDetail._id,
+              );
               setIsFavorite(!isFavorite);
             }}>
             <Image
@@ -218,6 +233,42 @@ const DetailScreen = ({route, navigation}) => {
       </ScrollView>
     </SafeAreaView>
   );
+};
+
+const addRemoveFavorite = (mode, authToken, userId, recipeId) => {
+  fetch(
+    mode === true
+      ? Gateway.__ADD_FAVORITE_RECIPE_BY_IDS_URL__
+      : Gateway.__REMOVE_FAVORITE_RECIPE_BY_IDS_URL__,
+    {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: 'bearer ' + authToken,
+      },
+      body: JSON.stringify({
+        userId: userId,
+        recipeId: recipeId,
+      }),
+    },
+  )
+    .then(response => response.json())
+    .then(res => {
+      const result = utils.setObject('fr', res);
+      if (result) {
+        console.log('..................', res);
+        Toast.show({
+          type: 'info',
+          text1: '',
+          text2: 'Your favorite recipes updated.',
+          visibilityTime: 2000,
+        });
+      }
+    })
+    .catch(error => {
+      console.error(error);
+    });
 };
 
 const renderIngredients = ({item, index}, viewSteps) =>
