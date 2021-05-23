@@ -9,11 +9,11 @@ const SplashScreen = ({navigation}) => {
 
   useEffect(() => {
     setTimeout(() => {
-      setAnimating(false);
+      setAnimating(true);
       //if authenticated, Land or else Login
-      utils
-        .getAppToken()
-        .then(value => navigation.replace(value === null ? 'Auth' : 'Landing'));
+      utils.getAppToken().then(token => {
+        navigation.replace(token === null ? 'Auth' : 'Landing');
+      });
     }, 1000);
   }, []);
 
