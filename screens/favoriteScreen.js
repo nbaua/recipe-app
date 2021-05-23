@@ -1,3 +1,4 @@
+import {useIsFocused} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {
   Alert,
@@ -13,13 +14,15 @@ import utils from '../shared/utils';
 const FavoriteScreen = props => {
   const [loading, setLoading] = useState(true);
   const [dataSource, setDataSource] = useState([]);
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     fetchDataFromStorage();
-  }, []);
+  }, [isFocused]);
 
   const fetchDataFromStorage = () => {
     utils.getObject('fr').then(fr => {
+      console.log(fr);
       if (fr !== null) {
         setDataSource(fr);
         setLoading(false);
