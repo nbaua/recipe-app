@@ -15,6 +15,7 @@ export default {
   fork_knife: require('./../assets/images/fork_knife.png'),
   clock: require('./../assets/images/clock.png'),
   likes: require('./../assets/images/likes.png'),
+  likes_on: require('./../assets/images/likes_on.png'),
   serve: require('./../assets/images/serve.png'),
   comment: require('./../assets/images/comment.png'),
   views: require('./../assets/images/views.png'),
