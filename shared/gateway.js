@@ -17,4 +17,7 @@ export default {
   __FAVORITE_RECIPES_BY_USER_ID_URL__: __BASE_URL__.concat('favorite?id={ID}'),
   __ADD_FAVORITE_RECIPE_BY_IDS_URL__: __BASE_URL__.concat('favorite/add'),
   __REMOVE_FAVORITE_RECIPE_BY_IDS_URL__: __BASE_URL__.concat('favorite/remove'),
+  __LIKED_RECIPES_BY_USER_ID_URL__: __BASE_URL__.concat('liked?id={ID}'),
+  __ADD_LIKED_RECIPE_BY_IDS_URL__: __BASE_URL__.concat('liked/add'),
+  __REMOVE_LIKED_RECIPE_BY_IDS_URL__: __BASE_URL__.concat('liked/remove'),
 };
