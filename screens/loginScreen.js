@@ -69,6 +69,7 @@ const LoginScreen = ({navigation}) => {
           AsyncStorage.setItem('access_token', res.token);
           AsyncStorage.setItem('id', res.id);
           utils.setObject('fr', res.fr);
+          utils.setObject('lr', res.lr);
           navigation.replace('Landing');
         } else {
           setErrortext(res.msg);

@@ -76,6 +76,21 @@ const LandingScreen = ({navigation}) => {
             utils.setObject('fry', null);
             console.error(err);
           });
+        //
+        fetch(
+          Gateway.__LIKED_RECIPES_BY_USER_ID_URL__.replace('{ID}', id),
+          utils.injectGetRequestHeader(token),
+        )
+          .then(response => response.json())
+          .then(responseJson => {
+            utils.setObject('lry', responseJson);
+            setLoading(false);
+          })
+          .catch(err => {
+            setLoading(false);
+            utils.setObject('lry', null);
+            console.error(err);
+          });
       }
     });
   };

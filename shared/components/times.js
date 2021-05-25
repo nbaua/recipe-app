@@ -1,9 +1,35 @@
-import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import React, {useState} from 'react';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import Toast from 'react-native-toast-message';
 import Constants from '../constants';
+import Gateway from './../gateway';
 import resources from './../resources';
+import utils from './../utils';
 
 const Times = props => {
+  const [userToken, setUserToken] = useState('');
+  const [isLiked, setIsLiked] = useState(false);
+  const [userId, setUserId] = useState('');
+  const [likedCount, setLikedCount] = useState(0);
+
+  React.useEffect(() => {
+    utils.getObject('id').then(uid => {
+      setUserId(uid);
+    });
+
+    utils.getObject('lr').then(lr => {
+      setIsLiked(lr?.includes(props.id));
+    });
+
+    utils.getAppToken().then(token => {
+      if (token) {
+        setUserToken(token);
+      }
+
+      setLikedCount(props.likes);
+    });
+  }, []);
+
   const styles = StyleSheet.create({
     timeElements: {
       flexDirection: 'row',
@@ -81,8 +107,20 @@ const Times = props => {
           </View>
         )}
         <View style={styles.iconBlocks}>
-          <Image style={styles.imageBlock} source={resources.likes} />
-          <Text style={styles.subTextBlock}> {props.likes}</Text>
+          <TouchableOpacity
+            onPress={() => {
+              addRemoveLikes(!isLiked, userToken, userId, props.id);
+              setIsLiked(!isLiked);
+              setLikedCount(
+                !isLiked === true ? likedCount + 1 : likedCount - 1,
+              );
+            }}>
+            <Image
+              style={styles.imageBlock}
+              source={isLiked ? resources.likes_on : resources.likes}
+            />
+          </TouchableOpacity>
+          <Text style={styles.subTextBlock}> {likedCount}</Text>
         </View>
         <View style={styles.iconBlocks}>
           <Image style={styles.imageBlock} source={resources.views} />
@@ -91,6 +129,52 @@ const Times = props => {
       </View>
     </>
   );
+};
+
+const addRemoveLikes = (mode, authToken, userId, recipeId) => {
+  fetch(
+    mode === true
+      ? Gateway.__ADD_LIKED_RECIPE_BY_IDS_URL__
+      : Gateway.__REMOVE_LIKED_RECIPE_BY_IDS_URL__,
+    {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: 'bearer ' + authToken,
+      },
+      body: JSON.stringify({
+        userId: userId,
+        recipeId: recipeId,
+      }),
+    },
+  )
+    .then(response => response.json())
+    .then(res => {
+      const result = utils.setObject('lry', res);
+      if (result) {
+        //also update the single ids
+        utils.getObject('lr').then(lr => {
+          if (mode) {
+            utils.setObject('lr', [...lr, recipeId]);
+          } else {
+            utils.setObject(
+              'lr',
+              lr?.filter(r => r !== recipeId),
+            );
+          }
+        });
+        Toast.show({
+          type: 'info',
+          text1: '',
+          text2: 'Your liked recipes updated.',
+          visibilityTime: 2000,
+        });
+      }
+    })
+    .catch(error => {
+      console.error(error);
+    });
 };
 
 export default Times;

@@ -152,6 +152,7 @@ const DetailScreen = ({route, navigation}) => {
         </View>
         {recipeDetail.times && (
           <Times
+            id={id}
             data={recipeDetail.times}
             serve={recipeDetail.servings}
             likes={recipeDetail.likes}
