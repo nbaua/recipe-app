@@ -1,0 +1,77 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/VarelaRound-Regular.ttf",
+      "sha1": "ad86ced34052796766fe4eec67b9eeb098443e75"
+    },
+    {
+      "path": "assets/fonts/WorkSans-Regular.ttf",
+      "sha1": "8b7f2913c0afd66e50d7e1737de59f65b19a2744"
+    },
+    {
+      "path": "assets/images/clock.png",
+      "sha1": "dfef7335632ad9bb7c55708f8308a3845573813d"
+    },
+    {
+      "path": "assets/images/comment.png",
+      "sha1": "37522daf4eebe7cb24ce2b96f4fdf96baa54f640"
+    },
+    {
+      "path": "assets/images/favorite.png",
+      "sha1": "12382936793a2603bc345bd54aceeb07a8ce2a46"
+    },
+    {
+      "path": "assets/images/favorite_on.png",
+      "sha1": "7dd1d54af615272a782129c50e47bb34fd9a9740"
+    },
+    {
+      "path": "assets/images/fork_knife.png",
+      "sha1": "839d53d0fe56ba82df0670eda1bf5819ae696564"
+    },
+    {
+      "path": "assets/images/likes.png",
+      "sha1": "5614d191d7ecb022ba3b573b5f331a8c6ec64ec4"
+    },
+    {
+      "path": "assets/images/likes_on.png",
+      "sha1": "311bdbe5a60716cf54e97082dcca32b68ad86f9c"
+    },
+    {
+      "path": "assets/images/logo.png",
+      "sha1": "1651b610d6ce4775011a2a0b28e0c9f95fa676c4"
+    },
+    {
+      "path": "assets/images/profile.png",
+      "sha1": "8f18ac5edd8553077b2a63abd7170b7f020600f1"
+    },
+    {
+      "path": "assets/images/recipe.png",
+      "sha1": "6a62f1580a98adb4e874ec4d488e1f039680b2ed"
+    },
+    {
+      "path": "assets/images/search.png",
+      "sha1": "f075df5a2f744e4581416d8fc45eeed53365aace"
+    },
+    {
+      "path": "assets/images/serve.png",
+      "sha1": "3cb6c86d76cf76b7f2d086e7c43bfc646cb68c89"
+    },
+    {
+      "path": "assets/images/toast_error.png",
+      "sha1": "82fe36739769a7abc3d25e4e0f99ceee90ee49cf"
+    },
+    {
+      "path": "assets/images/toast_info.png",
+      "sha1": "5a31ef6785b00f934964ae4a0d7512d7491175d3"
+    },
+    {
+      "path": "assets/images/toast_success.png",
+      "sha1": "d8adfafae6789e62998ce6baee55334fb76b1962"
+    },
+    {
+      "path": "assets/images/views.png",
+      "sha1": "3171749b8f5b93fbfbd4f9a25ae5b6b431cda223"
+    }
+  ]
+}
